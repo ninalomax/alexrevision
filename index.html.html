@@ -1,0 +1,1243 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Alex's November Revision Hub</title>
+<link href="https://fonts.googleapis.com/css2?family=Fraunces:ital,wght@0,400;0,600;0,700;1,400&family=DM+Sans:wght@400;500;600&display=swap" rel="stylesheet">
+<style>
+*,*::before,*::after{box-sizing:border-box;margin:0;padding:0}
+:root{--bg:#F7F4EF;--surface:#fff;--ink:#1A1714;--ink2:#5A5450;--ink3:#9A9490;--accent:#2B5E8A;--border:rgba(26,23,20,0.10);
+--math-bg:#EBF3FB;--math-t:#174F82;--eng-bg:#EEF5E8;--eng-t:#2B5A1A;--sci-bg:#E8F4F0;--sci-t:#165A48;--span-bg:#FDF3E4;--span-t:#7A4A0A;--pe-bg:#FDE9E4;--pe-t:#7A2A14;--biz-bg:#F0EBF8;--biz-t:#4A1E7A;
+--fd:'Fraunces',Georgia,serif;--fb:'DM Sans',system-ui,sans-serif;--r:12px}
+html{scroll-behavior:smooth}
+body{font-family:var(--fb);background:var(--bg);color:var(--ink);font-size:15px;line-height:1.6;min-height:100vh}
+nav{background:var(--ink);color:#fff;padding:0 2rem;display:flex;align-items:center;position:sticky;top:0;z-index:100;overflow-x:auto;scrollbar-width:none}
+nav::-webkit-scrollbar{display:none}
+.nav-brand{font-family:var(--fd);font-size:16px;font-weight:600;color:#fff;white-space:nowrap;padding:14px 0;margin-right:20px;flex-shrink:0}
+.nav-brand span{color:#69B3E7;font-style:italic}
+nav button{background:none;border:none;color:rgba(255,255,255,0.6);font-family:var(--fb);font-size:13px;font-weight:500;padding:14px 12px;cursor:pointer;white-space:nowrap;flex-shrink:0;border-bottom:2px solid transparent;transition:color .2s,border-color .2s}
+nav button:hover{color:#fff}
+nav button.active{color:#fff;border-bottom-color:#69B3E7}
+main{max-width:900px;margin:0 auto;padding:2rem 1.5rem 6rem}
+.page{display:none}
+.page.active{display:block}
+.hero{display:flex;align-items:center;gap:1.75rem;padding:2rem 0 1.75rem;flex-wrap:wrap}
+.hero-photo{width:160px;height:176px;border-radius:16px;object-fit:cover;object-position:center 20%;border:3px solid #69B3E7;flex-shrink:0;box-shadow:0 4px 20px rgba(43,94,138,0.25)}
+.hero-text h1{font-family:var(--fd);font-size:clamp(1.6rem,4vw,2.4rem);font-weight:700;line-height:1.15;margin-bottom:.5rem}
+.hero-text h1 em{color:var(--accent);font-style:italic}
+.hero-text p{color:var(--ink2);font-size:15px;max-width:460px;margin-bottom:1rem}
+.countdown-strip{display:inline-flex;gap:10px;background:var(--ink);color:#fff;border-radius:40px;padding:9px 18px;font-size:13px;font-weight:500;align-items:center}
+.countdown-strip .days{font-family:var(--fd);font-size:20px;font-weight:700;color:#69B3E7}
+.how-to{background:linear-gradient(135deg,#EBF3FB,#E8F4F0);border:1px solid rgba(43,94,138,0.15);border-radius:var(--r);padding:1rem 1.25rem;margin:1rem 0 0}
+.how-to h4{font-size:13px;font-weight:600;color:var(--accent);margin-bottom:8px}
+.how-to-steps{display:flex;gap:10px;flex-wrap:wrap}
+.how-step{font-size:12px;color:var(--ink2);background:#fff;border-radius:8px;padding:7px 11px;display:flex;align-items:center;gap:7px;border:1px solid var(--border)}
+.how-step .num{background:var(--accent);color:#fff;width:18px;height:18px;border-radius:50%;font-size:10px;font-weight:700;display:flex;align-items:center;justify-content:center;flex-shrink:0}
+.today-panel{background:var(--surface);border:2px solid var(--accent);border-radius:var(--r);padding:1.25rem 1.5rem;margin-top:1.5rem}
+.today-label{font-size:11px;font-weight:600;letter-spacing:.08em;text-transform:uppercase;color:var(--accent);margin-bottom:4px}
+.today-date{font-size:13px;color:var(--ink2);margin-bottom:10px}
+.today-subj{font-family:var(--fd);font-size:1.4rem;font-weight:700;margin-bottom:4px}
+.today-detail{font-size:13px;color:var(--ink2);line-height:1.55;margin-bottom:10px}
+.today-btns{display:flex;flex-wrap:wrap;gap:6px}
+.today-link{font-size:12px;font-weight:600;padding:5px 12px;border-radius:20px;text-decoration:none;color:#fff;display:inline-block}
+.exam-badge{display:inline-block;background:#B3261E;color:#fff;font-size:10px;font-weight:700;letter-spacing:.06em;text-transform:uppercase;padding:2px 8px;border-radius:20px;margin-right:6px}
+.exam-line{font-size:12px;font-weight:600;margin:4px 0 8px}
+.tonight{font-size:10px;font-weight:700;letter-spacing:.08em;text-transform:uppercase;opacity:.65;margin-bottom:2px}
+.fc-link{font-size:12px;font-weight:600;padding:5px 12px;border-radius:20px;border:1.5px dashed currentColor;background:rgba(255,255,255,.7);cursor:pointer;font-family:var(--fb);color:inherit}
+.subject-grid{display:grid;grid-template-columns:repeat(auto-fill,minmax(190px,1fr));gap:12px;margin-top:1.75rem}
+.subj-card{border-radius:var(--r);padding:1.1rem 1.2rem;cursor:pointer;transition:transform .18s,box-shadow .18s}
+.subj-card:hover{transform:translateY(-3px);box-shadow:0 8px 24px rgba(0,0,0,0.10)}
+.subj-card .emoji{font-size:22px;margin-bottom:7px;display:block}
+.subj-card h3{font-size:14px;font-weight:600;margin-bottom:3px}
+.subj-card p{font-size:12px;opacity:.75;line-height:1.4}
+.golden-rules{margin-top:1.75rem;background:var(--surface);border:1px solid var(--border);border-radius:var(--r);padding:1.25rem 1.5rem}
+.golden-rules h4{font-family:var(--fd);font-size:1.05rem;font-weight:700;margin-bottom:.75rem}
+.rules-grid{display:grid;grid-template-columns:repeat(auto-fill,minmax(195px,1fr));gap:8px}
+.rule{font-size:13px;color:var(--ink2);background:var(--bg);border-radius:8px;padding:10px 12px;line-height:1.5}
+.rule strong{color:var(--ink);display:block;margin-bottom:2px}
+.section-title{font-family:var(--fd);font-size:1.6rem;font-weight:700;margin-bottom:.3rem}
+.section-sub{color:var(--ink2);font-size:14px;margin-bottom:1.5rem}
+.week-tabs{display:flex;gap:6px;margin-bottom:1.25rem;flex-wrap:wrap}
+.wtab{padding:7px 16px;border-radius:30px;border:1.5px solid var(--border);background:var(--surface);font-family:var(--fb);font-size:13px;font-weight:500;cursor:pointer;color:var(--ink2);transition:all .18s}
+.wtab:hover{border-color:var(--accent);color:var(--accent)}
+.wtab.active{background:var(--accent);color:#fff;border-color:var(--accent)}
+.week-note{background:var(--surface);border-left:3px solid var(--accent);border-radius:0 var(--r) var(--r) 0;padding:10px 14px;font-size:13px;color:var(--ink2);margin-bottom:1.25rem}
+.sessions-grid{display:grid;grid-template-columns:repeat(auto-fill,minmax(185px,1fr));gap:10px}
+.session-card{border-radius:var(--r);padding:1rem 1.1rem}
+.session-card.day-off{background:var(--bg);border:1.5px dashed var(--border);color:var(--ink2)}
+.s-day{font-size:11px;font-weight:600;letter-spacing:.06em;text-transform:uppercase;margin-bottom:5px;opacity:.7}
+.s-subj{font-size:15px;font-weight:600;margin-bottom:4px}
+.s-detail{font-size:12px;line-height:1.55;opacity:.88}
+.s-dur{font-size:11px;margin-top:8px;opacity:.65;font-weight:500}
+.s-links{display:flex;flex-wrap:wrap;gap:5px;margin-top:9px}
+.s-link{font-size:11px;font-weight:600;padding:3px 9px;border-radius:20px;text-decoration:none;border:1px solid currentColor;opacity:.85;display:inline-block}
+.s-link:hover{opacity:1}
+.s-fc{font-size:11px;font-weight:600;padding:3px 9px;border-radius:20px;border:1.5px dashed currentColor;background:rgba(255,255,255,.7);cursor:pointer;font-family:var(--fb);color:inherit}
+.subject-header{border-radius:var(--r);padding:1.75rem 2rem;margin-bottom:1.75rem}
+.subject-header h2{font-family:var(--fd);font-size:2rem;font-weight:700;margin-bottom:.25rem}
+.board-tag{font-size:12px;font-weight:600;letter-spacing:.06em;text-transform:uppercase;opacity:.65;margin-bottom:8px}
+.subject-header p{font-size:14px;opacity:.82;line-height:1.55}
+.resource-section{margin-bottom:2rem}
+.resource-section h3{font-size:12px;font-weight:600;letter-spacing:.08em;text-transform:uppercase;color:var(--ink3);margin-bottom:10px;display:flex;align-items:center;gap:8px}
+.resource-section h3::after{content:'';flex:1;height:1px;background:var(--border)}
+.link-cards{display:grid;grid-template-columns:repeat(auto-fill,minmax(200px,1fr));gap:8px}
+.link-card{background:var(--surface);border:1px solid var(--border);border-radius:var(--r);padding:.9rem 1rem;text-decoration:none;color:inherit;transition:transform .18s,box-shadow .18s;display:flex;flex-direction:column;gap:4px}
+.link-card:hover{transform:translateY(-2px);box-shadow:0 4px 16px rgba(0,0,0,0.07)}
+.lc-badge{font-size:10px;font-weight:600;letter-spacing:.05em;text-transform:uppercase;padding:2px 8px;border-radius:20px;display:inline-block;width:fit-content;margin-bottom:2px}
+.lc-name{font-size:14px;font-weight:600}
+.lc-desc{font-size:12px;color:var(--ink2);line-height:1.4}
+.free-note{font-size:11px;color:#2B5A1A;background:#EEF5E8;border-radius:20px;padding:2px 8px;display:inline-block;margin-top:4px;width:fit-content}
+.tips-grid{display:grid;grid-template-columns:repeat(auto-fill,minmax(220px,1fr));gap:8px}
+.tip-card{background:var(--surface);border:1px solid var(--border);border-radius:var(--r);padding:.9rem 1rem .9rem 2.2rem;font-size:13px;color:var(--ink2);line-height:1.55;position:relative}
+.tip-card::before{content:attr(data-n);position:absolute;left:.85rem;top:.9rem;font-size:12px;font-weight:700;color:var(--ink3)}
+.tiktok-row{display:flex;flex-wrap:wrap;gap:8px;margin-bottom:8px}
+.tt-chip{display:inline-flex;align-items:center;gap:7px;background:#010101;color:#fff;border-radius:30px;padding:7px 14px;font-size:13px;font-weight:500;text-decoration:none}
+.tt-chip:hover{opacity:.75}
+.tt-icon{width:16px;height:16px;background:linear-gradient(135deg,#ff0050,#69C9D0);border-radius:4px;flex-shrink:0}
+.tt-desc-row{font-size:12px;color:var(--ink2);line-height:1.6}
+.back-btn{display:inline-flex;align-items:center;gap:6px;font-size:13px;color:var(--ink2);cursor:pointer;margin-bottom:1.5rem;background:none;border:none;font-family:var(--fb);padding:0}
+.back-btn:hover{color:var(--accent)}
+.deck-btns{display:flex;flex-wrap:wrap;gap:8px}
+.deck-btn{padding:9px 14px;border-radius:12px;border:1.5px dashed currentColor;background:var(--surface);font-family:var(--fb);font-size:13px;font-weight:600;cursor:pointer}
+.blk{display:flex;gap:8px;font-size:12px;line-height:1.45;margin-top:6px;align-items:flex-start}
+.blk .bm{font-weight:700;white-space:nowrap;background:rgba(255,255,255,.65);border-radius:10px;padding:0 7px}
+.blk.brk{opacity:.8;font-style:italic;background:rgba(255,255,255,.45);border-radius:8px;padding:3px 8px}
+.today-detail .blk{font-size:13px}
+/* FLASHCARDS */
+.fc-subjects{display:flex;flex-wrap:wrap;gap:8px;margin-bottom:1rem}
+.fc-chip{padding:8px 14px;border-radius:30px;border:2px solid transparent;font-family:var(--fb);font-size:13px;font-weight:600;cursor:pointer}
+.fc-chip.sel{border-color:var(--ink)}
+.fc-decks{display:grid;grid-template-columns:repeat(auto-fill,minmax(200px,1fr));gap:8px;margin-bottom:1.25rem}
+.fc-deck{background:var(--surface);border:1.5px solid var(--border);border-radius:var(--r);padding:.8rem 1rem;cursor:pointer;text-align:left;font-family:var(--fb);color:var(--ink)}
+.fc-deck:hover{border-color:var(--accent)}
+.fc-deck.sel{border-color:var(--accent);box-shadow:0 0 0 2px var(--accent) inset}
+.fc-deck .dt{font-size:14px;font-weight:600;display:block}
+.fc-deck .dm{font-size:12px;color:var(--ink2);display:block}
+.fc-bar{display:flex;justify-content:space-between;align-items:center;font-size:13px;color:var(--ink2);margin-bottom:6px;gap:8px;flex-wrap:wrap}
+.fc-bar strong{color:var(--ink)}
+.fc-prog{height:6px;background:rgba(26,23,20,.08);border-radius:3px;overflow:hidden;margin-bottom:12px}
+.fc-prog div{height:100%;background:#2E9E5B;width:0;transition:width .3s}
+.fc-card{perspective:1000px;height:290px;cursor:pointer;margin-bottom:8px;-webkit-tap-highlight-color:transparent}
+.fc-inner{position:relative;width:100%;height:100%;transition:transform .45s;transform-style:preserve-3d;-webkit-transform-style:preserve-3d}
+.fc-card.flipped .fc-inner{transform:rotateY(180deg);-webkit-transform:rotateY(180deg)}
+.fc-face{position:absolute;top:0;left:0;right:0;bottom:0;backface-visibility:hidden;-webkit-backface-visibility:hidden;border-radius:16px;padding:1.25rem 1.5rem;display:flex;flex-direction:column;align-items:center;justify-content:center;text-align:center;overflow:auto;border:2px solid var(--border);box-shadow:0 4px 18px rgba(0,0,0,.07)}
+.fc-front{background:var(--surface)}
+.fc-back{transform:rotateY(180deg);-webkit-transform:rotateY(180deg)}
+.fc-tag{font-size:10px;font-weight:700;letter-spacing:.1em;text-transform:uppercase;opacity:.55;margin-bottom:10px}
+.fc-text{font-size:1.2rem;line-height:1.45;font-weight:500;white-space:pre-line}
+.fc-hint{text-align:center;font-size:12px;color:var(--ink3);margin-bottom:10px}
+.fc-controls{display:flex;gap:8px;justify-content:center;margin-bottom:10px;flex-wrap:wrap}
+.fc-btn{padding:9px 18px;border-radius:30px;border:1.5px solid var(--border);background:var(--surface);font-family:var(--fb);font-size:14px;font-weight:600;cursor:pointer;color:var(--ink)}
+.fc-btn.primary{background:var(--accent);color:#fff;border-color:var(--accent)}
+.fc-btn.good{background:#2E9E5B;color:#fff;border-color:#2E9E5B}
+.fc-btn.again{background:#fff;color:#B3261E;border-color:#B3261E}
+.fc-tools{display:flex;flex-wrap:wrap;gap:6px;justify-content:center;margin-top:14px}
+.fc-tool{font-size:12px;padding:6px 12px;border-radius:20px;border:1px solid var(--border);background:var(--surface);cursor:pointer;font-family:var(--fb);color:var(--ink2)}
+.fc-tool.on{background:var(--ink);color:#fff}
+/* FLOATING TIMER */
+.timer-float{position:fixed;bottom:20px;right:20px;z-index:999;background:var(--ink);color:#fff;border-radius:16px;padding:12px 14px;box-shadow:0 4px 24px rgba(0,0,0,0.25);min-width:180px}
+.t-head{display:flex;align-items:center;justify-content:space-between;margin-bottom:6px;gap:8px}
+.t-label{font-size:10px;font-weight:600;letter-spacing:.06em;text-transform:uppercase;color:rgba(255,255,255,0.6)}
+.t-toggle{background:none;border:none;color:rgba(255,255,255,0.7);cursor:pointer;font-size:16px;padding:0 0 0 6px;line-height:1;font-family:var(--fb)}
+.t-mini{font-family:var(--fd);font-size:1.3rem;font-weight:700;color:#69B3E7;display:none}
+.timer-float.minimised .t-body{display:none}
+.timer-float.minimised{min-width:0;padding:10px 14px}
+.timer-float.minimised .t-mini{display:block}
+.timer-float.minimised .t-head{margin-bottom:0}
+.t-progress{width:100%;height:4px;background:rgba(255,255,255,0.2);border-radius:2px;overflow:hidden;margin-bottom:8px}
+.t-bar{height:100%;background:#69B3E7;border-radius:2px;transition:width .5s linear;width:100%}
+.t-display{font-family:var(--fd);font-size:2.2rem;font-weight:700;text-align:center;color:#69B3E7;line-height:1;margin-bottom:.65rem}
+.t-display.warn{color:#FF8C5A}
+.t-display.done{color:#7BCFA0}
+.t-presets{display:flex;gap:4px;flex-wrap:wrap;margin-bottom:.55rem}
+.t-preset{padding:4px 7px;border-radius:20px;border:1.5px solid rgba(255,255,255,0.2);background:transparent;font-family:var(--fb);font-size:11px;font-weight:500;cursor:pointer;color:rgba(255,255,255,0.7)}
+.t-preset.sel{background:#69B3E7;color:var(--ink);border-color:#69B3E7}
+.t-custom{display:flex;align-items:center;gap:6px;margin-bottom:.55rem}
+.t-custom input{width:50px;padding:4px 6px;border:1.5px solid rgba(255,255,255,0.2);border-radius:8px;font-family:var(--fb);font-size:12px;font-weight:600;text-align:center;background:rgba(255,255,255,0.1);color:#fff}
+.t-custom span{font-size:11px;color:rgba(255,255,255,0.6)}
+.t-controls{display:flex;gap:6px;margin-bottom:.4rem}
+.t-btn{padding:6px 10px;border-radius:30px;border:none;font-family:var(--fb);font-size:12px;font-weight:600;cursor:pointer}
+.t-btn.go{background:#69B3E7;color:var(--ink);flex:1}
+.t-btn.pause{background:rgba(255,255,255,0.15);color:#fff;border:1.5px solid rgba(255,255,255,0.2);flex:1}
+.t-btn.rst{background:rgba(255,255,255,0.1);color:rgba(255,255,255,0.8);border:1.5px solid rgba(255,255,255,0.2)}
+.t-msg{font-size:10px;color:rgba(255,255,255,0.55);text-align:center;min-height:14px}
+@media(max-width:600px){nav{padding:0 1rem}main{padding:1.5rem 1rem 6rem}.hero{gap:1rem}.hero-photo{width:120px;height:132px}.timer-float{bottom:12px;right:12px}.fc-card{height:320px}}
+/* PRINT */
+#print-area{display:none}
+@media print{
+  body{background:#fff}
+  nav,main,.timer-float{display:none !important}
+  #print-area{display:block !important}
+  .pr-head{font-size:11px;color:#555;margin-bottom:6mm}
+  .pr-deck{font-size:16px;font-weight:700;margin:6mm 0 3mm;page-break-after:avoid}
+  .pr-card{display:flex;border:1px dashed #777;margin-bottom:3mm;page-break-inside:avoid;min-height:24mm}
+  .pr-q,.pr-a{flex:1;padding:3mm 4mm;font-size:12px;line-height:1.4;display:flex;align-items:center;white-space:pre-line}
+  .pr-q{border-right:1px dashed #777;font-weight:600}
+  @page{margin:12mm}
+}
+</style>
+</head>
+<body>
+<nav>
+  <div class="nav-brand">Alex's <span>Nov Mocks</span></div>
+  <button data-nav="home" class="active" onclick="showPage('home')">&#127968; Home</button>
+  <button data-nav="timetable" onclick="showPage('timetable')">&#128197; Timetable</button>
+  <button data-nav="flash" onclick="showFlash()">&#127183; Flashcards</button>
+  <button data-nav="math" onclick="showSubject('math')">&#128208; Maths</button>
+  <button data-nav="english" onclick="showSubject('english')">&#128214; English</button>
+  <button data-nav="science" onclick="showSubject('science')">&#128300; Science</button>
+  <button data-nav="spanish" onclick="showSubject('spanish')">&#127758; Spanish</button>
+  <button data-nav="pe" onclick="showSubject('pe')">&#127939; PE</button>
+  <button data-nav="business" onclick="showSubject('business')">&#128188; Business</button>
+</nav>
+<main>
+
+<div class="page active" id="page-home">
+  <div class="hero">
+    <img class="hero-photo" src="data:image/jpeg;base64,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" alt="Alex">
+    <div class="hero-text">
+      <h1>Alex's November<br><em>Mock Revision</em></h1>
+      <p>Your personalised revision plan. Short sessions done consistently make a massive difference. Mocks start Monday 16th November.</p>
+      <div class="countdown-strip"><span>&#9203;</span><span class="days" id="cd-days">--</span><span id="cd-lbl">days to go</span></div>
+    </div>
+  </div>
+  <div class="how-to">
+    <h4>&#128203; How to use this hub</h4>
+    <div class="how-to-steps">
+      <div class="how-step"><div class="num">1</div>Check <strong>Today's session</strong> below</div>
+      <div class="how-step"><div class="num">2</div>Tap <strong>&#127183; flashcards</strong> to test yourself</div>
+      <div class="how-step"><div class="num">3</div>Use the <strong>timer</strong> (bottom right)</div>
+    </div>
+  </div>
+  <div class="today-panel" id="today-panel"></div>
+  <div class="subject-grid">
+    <div class="subj-card" style="background:var(--math-bg);color:var(--math-t)" onclick="showSubject('math')"><span class="emoji">&#128208;</span><h3>Maths Higher</h3><p>Edexcel &middot; Corbettmaths &middot; Dr Frost</p></div>
+    <div class="subj-card" style="background:var(--eng-bg);color:var(--eng-t)" onclick="showSubject('english')"><span class="emoji">&#128214;</span><h3>English Lit &amp; Lang</h3><p>AQA &middot; Mr Bruff &middot; Tassomai</p></div>
+    <div class="subj-card" style="background:var(--sci-bg);color:var(--sci-t)" onclick="showSubject('science')"><span class="emoji">&#128300;</span><h3>Combined Science</h3><p>AQA Foundation &middot; Sparx</p></div>
+    <div class="subj-card" style="background:var(--span-bg);color:var(--span-t)" onclick="showSubject('spanish')"><span class="emoji">&#127758;</span><h3>Spanish</h3><p>AQA &middot; Seneca &middot; Quizlet</p></div>
+    <div class="subj-card" style="background:var(--pe-bg);color:var(--pe-t)" onclick="showSubject('pe')"><span class="emoji">&#127939;</span><h3>PE Theory</h3><p>AQA &middot; Seneca &middot; BBC Bitesize</p></div>
+    <div class="subj-card" style="background:var(--biz-bg);color:var(--biz-t)" onclick="showSubject('business')"><span class="emoji">&#128188;</span><h3>Business</h3><p>Enterprise &amp; Marketing &middot; Tutor2u</p></div>
+    <div class="subj-card" style="background:var(--ink);color:#fff" onclick="showFlash()"><span class="emoji">&#127183;</span><h3>Flashcards</h3><p>Flip, test yourself, or print and cut out</p></div>
+  </div>
+  <div class="golden-rules">
+    <h4>&#129504; Golden rules</h4>
+    <div class="rules-grid">
+      <div class="rule"><strong>Short sessions work.</strong>20-45 mins per subject, with a break in between, beats a 3-hour grind every time.</div>
+      <div class="rule"><strong>Active beats passive.</strong>Flashcards, Seneca and past papers beat re-reading notes.</div>
+      <div class="rule"><strong>Set a timer.</strong>Work until it goes off. Short break. Repeat.</div>
+      <div class="rule"><strong>Take your day off.</strong>One day off a week is part of the plan - rest is revision too.</div>
+    </div>
+  </div>
+</div>
+
+<div class="page" id="page-timetable">
+  <div class="section-title">Revision Timetable</div>
+  <div class="section-sub">6 weeks &middot; builds from 20 min sessions up to 45 mins per subject &middot; one day off a week (usually Friday) &middot; Exams 16-26 November. Revision is always the night BEFORE each exam.</div>
+  <div class="week-tabs" id="wtabs"></div>
+  <div class="week-note" id="wnote"></div>
+  <div class="sessions-grid" id="sgrid"></div>
+</div>
+
+<div class="page" id="page-flash">
+  <div class="section-title">&#127183; Flashcards</div>
+  <div class="section-sub">Pick a subject and a deck. Tap the card to flip it, then mark whether you got it. You can print any deck, cut the cards out and fold them.</div>
+  <div class="fc-subjects" id="fc-subjects"></div>
+  <div class="fc-decks" id="fc-decks"></div>
+  <div id="fc-study" style="display:none">
+    <div class="fc-bar"><strong id="fc-title"></strong><span id="fc-count"></span></div>
+    <div class="fc-prog"><div id="fc-pbar"></div></div>
+    <div class="fc-card" id="fc-card" onclick="fcFlip()">
+      <div class="fc-inner">
+        <div class="fc-face fc-front" id="fc-front"><div class="fc-tag">Front</div><div class="fc-text" id="fc-q"></div></div>
+        <div class="fc-face fc-back" id="fc-back"><div class="fc-tag">Back</div><div class="fc-text" id="fc-a"></div></div>
+      </div>
+    </div>
+    <div class="fc-hint">Tap the card to flip it &middot; arrow keys and space bar work too</div>
+    <div class="fc-controls">
+      <button class="fc-btn" onclick="fcPrev()">&larr; Back</button>
+      <button class="fc-btn primary" onclick="fcFlip()">Flip</button>
+      <button class="fc-btn" onclick="fcNext()">Next &rarr;</button>
+    </div>
+    <div class="fc-controls">
+      <button class="fc-btn again" onclick="fcMark(2)">&#10007; Still learning</button>
+      <button class="fc-btn good" onclick="fcMark(1)">&#10003; Got it</button>
+    </div>
+    <div class="fc-tools">
+      <button class="fc-tool" onclick="fcShuffle()">&#128256; Shuffle</button>
+      <button class="fc-tool" id="fc-swap" onclick="fcSwap()">&#8596; Swap sides</button>
+      <button class="fc-tool" id="fc-only" onclick="fcOnly()">Only cards I haven't got yet</button>
+      <button class="fc-tool" onclick="fcReset()">&#8634; Clear my ticks</button>
+      <button class="fc-tool" onclick="fcPrintDeck()">&#128424; Print this deck</button>
+      <button class="fc-tool" onclick="fcPrintSubject()">&#128424; Print whole subject</button>
+    </div>
+  </div>
+</div>
+
+<div class="page" id="page-subject">
+  <button class="back-btn" onclick="showPage('home')">&#8592; Back to home</button>
+  <div id="subj-content"></div>
+</div>
+
+<div class="timer-float" id="timer-float">
+  <div class="t-head"><span class="t-label">&#9203; Timer</span><span class="t-mini" id="t-mini">20:00</span><button class="t-toggle" id="t-toggle" onclick="tToggle()" title="Minimise">&ndash;</button></div>
+  <div class="t-body">
+    <div class="t-progress"><div class="t-bar" id="t-bar"></div></div>
+    <div class="t-display" id="t-disp">20:00</div>
+    <div class="t-presets">
+      <button class="t-preset" onclick="tPreset(15)">15m</button>
+      <button class="t-preset sel" onclick="tPreset(20)">20m</button>
+      <button class="t-preset" onclick="tPreset(30)">30m</button>
+      <button class="t-preset" onclick="tPreset(35)">35m</button>
+      <button class="t-preset" onclick="tPreset(45)">45m</button>
+    </div>
+    <div class="t-custom"><input type="number" id="t-custom" min="1" max="120" value="20" onchange="tCustom(this.value)"><span>custom mins</span></div>
+    <div class="t-controls"><button class="t-btn go" id="t-go" onclick="tGo()">&#9654; Start</button><button class="t-btn rst" onclick="tReset()">&#8634;</button></div>
+    <div class="t-msg" id="t-msg">Set time and press Start!</div>
+  </div>
+</div>
+</main>
+<div id="print-area"></div>
+
+<script>
+var DECKS={
+"math-exam":{s:"math",t:"Edexcel exam guide",c:[
+["How is Edexcel GCSE Maths (Higher) set out?","3 papers, each 1 hour 30 minutes and 80 marks (240 in total).\nPaper 1 = NON-calculator\nPapers 2 and 3 = calculator\nHigher grades: 9 to 4 (with a safety-net grade 3)."],
+["Which topics are on which paper?","ALL topics can appear on ALL three papers: number, algebra, ratio and proportion, geometry, probability and statistics."],
+["How long should you spend per question?","Roughly 1 minute per mark. If you're stuck, move on and come back at the end - don't lose 10 minutes on a 3-mark question."],
+["Edexcel mark schemes: M and A marks","M = method mark (a correct method, even if the answer is wrong)\nA = accuracy mark (correct answer, but you need the method mark first)"],
+["Edexcel mark schemes: B, P and C marks","B = independent mark (e.g. a correct fact or value)\nP = process mark (a sensible plan in a problem-solving question)\nC = communication mark (a clear explanation or conclusion)"],
+["Common command words","Write down: no working needed.\nWork out / Calculate: show your method.\nEstimate: round to 1 significant figure.\nExplain / Give a reason: write a short sentence."],
+["How do you answer a 'Show that...' question?","Write EVERY step of the working and finish with the exact value you were asked to show. Just writing the answer earns no marks."],
+["How do you answer a 'Prove...' question?","Use algebra: start from a general case (even = 2n, odd = 2n + 1), simplify, then finish with a clear conclusion sentence."],
+["Non-calculator paper: how should you give answers?","Leave answers EXACT when asked: as fractions, surds or in terms of π. Estimate by rounding each number to 1 significant figure."],
+["Rounding: when do you round?","Only at the END. Keep the full calculator display in between, then round to what the question asks (e.g. 3 s.f. or 1 d.p.)."],
+["Not sure what a question wants?","Underline the key words and units, write down what you know, then decide what you need to find FIRST (that's often the P mark)."],
+["Calculator checks (Papers 2 and 3)","Is it in DEGREES mode for trig? Use brackets for fractions and powers. Does the answer make sense (probability ≤ 1, lengths positive)?"],
+["Formulae sheet: what should you do?","Pearson's real papers come with a formulae sheet, but your school mock may not. Ask your teacher - and learn the key formulae either way."],
+["Last 5 minutes","Check units, check you've answered every part, and put something down for every question - a method can earn marks even if the answer is wrong."]
+]},
+"math-algebra":{s:"math",t:"Number and algebra",c:[
+["Quadratic formula (for ax² + bx + c = 0)","x = (−b ± √(b² − 4ac)) ÷ 2a"],
+["Difference of two squares: a² − b² =","(a + b)(a − b)"],
+["Index laws: aᵐ × aⁿ, aᵐ ÷ aⁿ and (aᵐ)ⁿ","a^(m+n)  ·  a^(m−n)  ·  a^(m×n)\n(add, subtract, multiply the powers)"],
+["What are a⁰ and a⁻ⁿ?","a⁰ = 1\na⁻ⁿ = 1 ÷ aⁿ  (negative power = reciprocal)"],
+["Fractional powers","a^(1/2) = √a\na^(1/3) = ∛a\na^(m/n) = (ⁿ√a)ᵐ  (root first, then the power)"],
+["Percentage change formula","(change ÷ original) × 100"],
+["How do you do a reverse percentage question?","Find the multiplier (e.g. +20% = 1.2), then DIVIDE the new amount by it to get the original."],
+["Compound growth formula","New amount = original × (multiplier)ⁿ\nwhere n = number of years or periods"],
+["Share £60 in the ratio 2 : 3","Add the parts (5). £60 ÷ 5 = £12 per part.\nSo £24 and £36."],
+["How do you divide fractions?","Keep the first, flip the second, then multiply.\n⅔ ÷ ¼ = ⅔ × 4 = 8/3"],
+["Standard form: what must the front number be?","A × 10ⁿ where 1 ≤ A < 10\n(e.g. 4 500 000 = 4.5 × 10⁶)"],
+["Simplify √12","√12 = √4 × √3 = 2√3\n(look for the biggest square-number factor)"],
+["Rationalise the denominator","1 ÷ √3 = √3 ÷ 3  (multiply top and bottom by the surd)\nFor 1 ÷ (2 + √3) multiply top and bottom by (2 − √3)."],
+["Expand (x + 3)(x + 5)","x² + 8x + 15\n(multiply every term in one bracket by every term in the other)"],
+["How do you factorise x² + 7x + 12?","Find two numbers that multiply to 12 and add to 7: 3 and 4.\n(x + 3)(x + 4)\nIf a ≠ 1: multiply a × c, split the middle term, factorise in pairs."],
+["Steps to solve a quadratic by factorising","1) Rearrange so it equals 0\n2) Factorise into two brackets\n3) Set each bracket = 0\n4) Solve both"],
+["Steps to solve simultaneous equations (elimination)","Match the coefficients of one letter, add or subtract to eliminate it, solve, then substitute back to find the other letter."],
+["Find the nth term of 5, 8, 11, 14…","Difference is 3, so start with 3n.\n3 × 1 = 3 but we need 5, so add 2.\nnth term = 3n + 2"],
+["What happens if you multiply or divide an inequality by a negative?","The inequality sign flips.\n−2x < 6  →  x > −3"],
+["HCF and LCM using prime factors","Write each number as a product of primes.\nHCF = multiply the primes they SHARE (lowest powers).\nLCM = multiply ALL the primes (highest powers)."],
+["Turn 0.777… (recurring) into a fraction","Let x = 0.777…, so 10x = 7.777…\nSubtract: 9x = 7, so x = 7/9"],
+["Upper and lower bounds","To the nearest 10 means ±5: 40 → 35 ≤ x < 45.\nFor a ÷ b: biggest answer = upper bound of a ÷ lower bound of b."],
+["Direct and inverse proportion","Direct: y = kx (both go up together).\nInverse: y = k ÷ x (one goes up, the other goes down).\nFind k first using the values you're given."],
+["Speed, density and pressure formulae","Speed = distance ÷ time\nDensity = mass ÷ volume\nPressure = force ÷ area"]
+]},
+"math-higher":{s:"math",t:"Graphs and Higher algebra",c:[
+["Equation of a straight line","y = mx + c\n(m = gradient, c = y-intercept)"],
+["How do you find the gradient between two points?","Change in y ÷ change in x  (rise ÷ run)"],
+["Find the equation of a line through two points","1) Find the gradient m\n2) Put m and one point into y = mx + c\n3) Solve for c"],
+["Parallel and perpendicular lines: what do the gradients do?","Parallel: same gradient.\nPerpendicular: gradients multiply to give −1."],
+["Completing the square","x² + bx + c = (x + b/2)² + c − (b/2)²\nx² + 6x + 5 = (x + 3)² − 4, so the turning point is (−3, −4)."],
+["Features of a quadratic graph","Roots where y = 0 · y-intercept at c · a turning point on the line of symmetry · U-shaped if a > 0, ∩-shaped if a < 0"],
+["Solve a quadratic inequality","Sketch the graph and mark the roots.\nx² − 4 > 0 gives x < −2 or x > 2."],
+["Algebraic fractions","FACTORISE top and bottom first, then cancel common factors (not terms).\nTo add or subtract, use a common denominator."],
+["Function notation and composite functions","f(3) means replace x with 3.\nfg(x) = f(g(x)) - do g FIRST, then f."],
+["How do you find an inverse function?","Swap x and y, then rearrange for y.\nf(x) = 2x + 3 → x = 2y + 3 → f⁻¹(x) = (x − 3) ÷ 2"],
+["Rearranging when the subject appears twice","Collect all the terms with the subject on one side, factorise the subject out, then divide."],
+["Algebraic proof: useful starting points","Even = 2n · Odd = 2n + 1 · Consecutive integers = n, n + 1\nExpand and factorise, show it's a multiple of what you want, then write a conclusion."],
+["Transformations of graphs","y = f(x) + a: moves UP a\ny = f(x + a): moves LEFT a\ny = −f(x): reflect in the x-axis\ny = f(−x): reflect in the y-axis"],
+["Equation of a circle and its tangent","Circle, centre the origin: x² + y² = r²\nTangent ⟂ radius, so tangent gradient = −1 ÷ radius gradient."],
+["Gradient of a curve at a point","Draw a TANGENT at that point, then find its gradient (rise ÷ run)."],
+["Distance-time and velocity-time graphs","Distance-time: gradient = speed.\nVelocity-time: gradient = acceleration, area under the graph = distance."],
+["Estimate the area under a graph","Split it into trapezia (or rectangles) and add them up.\nTrapezium = ½(a + b)h"],
+["Iteration","xₙ₊₁ = f(xₙ). Start with x₀, put each answer back in, and the values settle (converge) towards a solution."],
+["Trig graphs","sin x: starts at 0, repeats every 360°.\ncos x: starts at 1, repeats every 360°.\ntan x: repeats every 180°, with asymptotes at 90° and 270°."],
+["Simultaneous equations: one linear, one quadratic","Substitute the linear equation into the quadratic, rearrange to = 0, solve, then find the other letter."],
+["Exponential graphs y = kˣ","Passes through (0, 1). Growth if k > 1, decay if 0 < k < 1."],
+["nth term of a quadratic sequence","an² + bn + c, where a = (second difference) ÷ 2.\nSubtract an² from the sequence to leave a linear sequence."]
+]},
+"math-geometry":{s:"math",t:"Geometry, trig and vectors",c:[
+["Area and circumference of a circle","Area = πr²\nCircumference = 2πr (or πd)"],
+["Pythagoras' theorem","a² + b² = c²\n(c is the hypotenuse - right-angled triangles only)"],
+["3D Pythagoras (cuboid diagonal)","d² = a² + b² + c²"],
+["SOH CAH TOA","sin = Opposite ÷ Hypotenuse\ncos = Adjacent ÷ Hypotenuse\ntan = Opposite ÷ Adjacent"],
+["Angle of elevation and depression","Both are measured from the HORIZONTAL - elevation looks up, depression looks down."],
+["Sine rule","a ÷ sin A = b ÷ sin B\n(use when you have a matching side and angle pair)"],
+["Cosine rule","a² = b² + c² − 2bc cos A\n(two sides and the angle between, or all three sides)"],
+["Area of any triangle using an angle","Area = ½ab sin C"],
+["Volume of a prism and a cylinder","Prism = area of cross-section × length\nCylinder = πr²h"],
+["Volume of a cone and a sphere","Cone = ⅓πr²h\nSphere = 4/3 πr³"],
+["Surface area of a sphere, cone and cylinder","Sphere = 4πr²\nCone (curved) = πrl  (l = slant height)\nCylinder = 2πr² + 2πrh"],
+["Arc length and sector area","Arc = (θ ÷ 360) × 2πr\nSector area = (θ ÷ 360) × πr²"],
+["Angles in a polygon","Interior angles add up to (n − 2) × 180°\nExterior angles always add up to 360°"],
+["Angle facts to remember","Straight line = 180°\nAround a point = 360°\nTriangle = 180°\nQuadrilateral = 360°"],
+["Angles in parallel lines","Alternate (Z) angles are equal\nCorresponding (F) angles are equal\nCo-interior (C) angles add to 180°"],
+["Circle theorem 1","The angle at the centre is TWICE the angle at the circumference (same arc)."],
+["Circle theorem 2","The angle in a semicircle is 90°."],
+["Circle theorem 3","Angles in the same segment are equal."],
+["Circle theorem 4","Opposite angles in a cyclic quadrilateral add up to 180°."],
+["Circle theorem 5","A tangent meets the radius at 90°.\nTwo tangents from one point are equal in length."],
+["Circle theorem 6 (alternate segment)","The angle between a tangent and a chord equals the angle in the alternate segment."],
+["Circle theorem 7","A line from the centre that meets a chord at 90° bisects (cuts in half) the chord."],
+["Exact trig values: 30°","sin 30° = ½\ncos 30° = √3/2\ntan 30° = 1/√3"],
+["Exact trig values: 45°","sin 45° = cos 45° = √2/2 (or 1/√2)\ntan 45° = 1"],
+["Exact trig values: 60°","sin 60° = √3/2\ncos 60° = ½\ntan 60° = √3"],
+["Similar shapes: scale factor k","Lengths × k\nAreas × k²\nVolumes × k³"],
+["Congruent triangles: the four tests","SSS · SAS · ASA · RHS\n(three sides · two sides and the angle between · two angles and a side · right angle, hypotenuse, side)"],
+["How do you measure a bearing?","Clockwise from North, always with three figures (e.g. 045°)."],
+["Area of a trapezium and a parallelogram","Trapezium = ½(a + b)h\nParallelogram = base × perpendicular height"],
+["The four transformations","Translation: column vector.\nReflection: mirror line.\nRotation: centre, angle AND direction.\nEnlargement: scale factor AND centre (a negative scale factor flips it)."],
+["Vectors: the key ideas","Column vector (x over y). Magnitude = √(x² + y²).\nAB = b − a.\nParallel vectors are multiples of each other; if they also share a point, the points are in a straight line."]
+]},
+"math-stats":{s:"math",t:"Statistics and probability",c:[
+["Mean, median, mode, range","Mean = total ÷ number of values\nMedian = middle value (in order)\nMode = most common\nRange = biggest − smallest"],
+["What is the probability scale?","0 = impossible, 1 = certain.\nP(not A) = 1 − P(A)"],
+["Independent events: P(A and B)","P(A) × P(B)\n(multiply)"],
+["Mutually exclusive events: P(A or B)","P(A) + P(B)\n(add)"],
+["Expected number of outcomes","Probability × number of trials"],
+["Tree diagrams: the rules","MULTIPLY along the branches.\nADD between different routes.\nEach set of branches adds up to 1."],
+["Probability without replacement","The total number of items goes DOWN after each pick, so the second fraction changes."],
+["Mean from a frequency table","Σ(frequency × value) ÷ Σ frequency\n(add a column f × x)"],
+["Mean from grouped data","Use the MIDPOINT of each group, then Σ(f × midpoint) ÷ Σf. It's an estimate."],
+["Modal class and median class","Modal class = the group with the highest frequency.\nMedian is in the group containing the (n + 1) ÷ 2 th value."],
+["Cumulative frequency graph: how to use it","Plot against the UPPER class boundary.\nMedian at ½ n, lower quartile at ¼ n, upper quartile at ¾ n.\nIQR = UQ − LQ"],
+["Histogram with unequal widths","Frequency density = frequency ÷ class width\n(the bar's AREA shows frequency)"],
+["Scatter graph: what do you describe?","Correlation: positive, negative or none.\nUse a line of best fit to estimate, but don't go far outside the data."],
+["Stratified sample","(number in group ÷ whole population) × sample size"],
+["Capture-recapture (estimating a population)","N = (M × C) ÷ R\nM = number marked first, C = number caught second, R = marked ones in the second catch."],
+["Relative frequency","Frequency ÷ total number of trials\n(the more trials, the better the estimate)"],
+["Venn diagram symbols","A ∩ B = in both (and)\nA ∪ B = in either (or)\nA′ = not in A"],
+["Pie chart angles","Angle = (frequency ÷ total) × 360°"],
+["What does a box plot show?","Minimum, lower quartile, median, upper quartile, maximum."],
+["How do you compare two distributions?","Compare an AVERAGE (median or mean) AND a SPREAD (range or IQR), and write it in the context of the question."]
+]},
+"eng-aic":{s:"english",t:"An Inspector Calls",c:[
+["When is the play set, and when was it written?","Set in 1912 (before WWI and the Titanic sinking).\nWritten in 1945, just after WWII."],
+["Who is Arthur Birling?","Wealthy factory owner and capitalist. Pompous and sure he's right - but he's wrong about the Titanic and war. Represents selfish, profit-first attitudes."],
+["Who is Sybil Birling?","Arthur's wife, a social climber who chairs a charity. Cold and prejudiced - she refuses to help Eva and blames the father of the child."],
+["How does Sheila change?","Starts as spoilt and naive (got Eva sacked at Milwards out of jealousy). Accepts responsibility and becomes a voice for change."],
+["Who is Eric and what did he do?","The Birlings' son. Drinks heavily, got Eva pregnant and stole money from his father's office. Feels guilt and shows the younger generation's conscience."],
+["Who is Gerald Croft?","Upper-class fiancé of Sheila. Had an affair with Daisy Renton (Eva). Relieved when the Inspector seems fake - shows the upper class resisting change."],
+["Who is Inspector Goole?","A mysterious inspector who acts as Priestley's moral voice. His name sounds like 'ghoul'. He leaves everyone to face their guilt."],
+["Who is Eva Smith / Daisy Renton?","A young working-class woman whose life ends in suicide. She stands for the many poor people exploited by those with money and power."],
+["Theme: responsibility","Priestley's message: we are all connected and responsible for each other.\nKey phrases: 'we are members of one body'; 'fire and blood and anguish'."],
+["Theme: social class","Upper classes treat Eva as disposable. Mr and Mrs Birling look down on the lower class. Shows how class prejudice causes harm."],
+["Theme: generations","The older generation (Arthur, Sybil) refuse to change. The younger (Sheila, Eric) learn and want to change - Priestley's hope for the future."],
+["Theme: gender","Women are controlled and exploited: Eva (low pay, then used), Sheila (treated as a possession), Sybil (stuck in a traditional role)."],
+["What is dramatic irony and where is it used?","The audience knows more than the characters. Arthur's confident predictions (no war, the Titanic is 'unsinkable') are proved wrong - 1945 audiences knew it."],
+["How does the play's structure build tension?","Three acts, each ending on a cliffhanger. One continuous scene in one room. The final phone call twist leaves the audience unsettled."],
+["How do the stage directions use lighting?","Soft, pink and intimate lighting becomes brighter and harder when the Inspector arrives - the truth is being exposed."],
+["Context to link to Priestley's message","Priestley was a socialist. 1945 = the Welfare State was starting. Edwardian society was very class-divided and women had no vote in 1912."]
+]},
+"eng-macbeth":{s:"english",t:"Macbeth",c:[
+["When was Macbeth written and for whom?","About 1606, for King James I (a Scottish king). It reflects the Divine Right of Kings, fear of witchcraft and the Gunpowder Plot (1605)."],
+["What type of play is Macbeth?","A tragedy. Macbeth is a tragic hero - a noble man brought down by a fatal flaw (hamartia): his ambition."],
+["Plot - Act 1","The witches prophesy Macbeth will be Thane of Cawdor and king, and that Banquo's children will be kings. Macbeth is made Thane of Cawdor. Lady Macbeth urges him to kill Duncan."],
+["Plot - Act 2","Macbeth murders Duncan (after seeing a dagger). Lady Macbeth smears the guards with blood. Duncan's sons flee and Macbeth is crowned."],
+["Plot - Act 3","Macbeth has Banquo murdered, but Fleance escapes. Banquo's ghost appears at the banquet and Macbeth loses control."],
+["Plot - Act 4","The witches' apparitions warn him about Macduff, say none 'of woman born' can harm him, and that he's safe till Birnam Wood comes to Dunsinane. Macbeth has Macduff's family killed."],
+["Plot - Act 5","Lady Macbeth sleepwalks and dies. Malcolm's army carries branches from Birnam Wood. Macduff (born by caesarean) kills Macbeth and Malcolm becomes king."],
+["Macbeth's character journey","A brave, loyal warrior ('brave Macbeth') who hesitates at first, then becomes a ruthless tyrant, increasingly numb to violence."],
+["Lady Macbeth's character journey","Ambitious and manipulative: she calls on spirits to 'unsex me here' and challenges Macbeth's manhood. Later she's destroyed by guilt and goes mad."],
+["Banquo","Noble and loyal - a contrast (foil) to Macbeth. He doubts the witches, is murdered, and his ghost haunts Macbeth's conscience."],
+["Macduff and Malcolm","Macduff: loyal and moral, flees to England, loses his family and kills Macbeth.\nMalcolm: Duncan's rightful heir who restores order."],
+["Duncan","A kind, trusting and good king - his murder is a crime against God and nature."],
+["The witches (Weird Sisters)","Supernatural, speak in riddles and rhyme. They tempt Macbeth but never tell him to murder - he chooses to."],
+["Theme: ambition","'I have no spur ... but only vaulting ambition, which o'erleaps itself' - Macbeth admits ambition is his only reason to kill, and warns it can destroy him."],
+["Theme: appearance and reality","'Fair is foul, and foul is fair.'\nLady Macbeth: 'look like th' innocent flower, but be the serpent under't' - deceiving everyone."],
+["Theme: guilt","Macbeth: 'Will all great Neptune's ocean wash this blood clean from my hand?'\nLady Macbeth: 'Out, damned spot!' - guilt cannot be washed away."],
+["Theme: fate and free will","The prophecies suggest fate, but Macbeth chooses to act. Shakespeare shows people are responsible for their choices."],
+["Theme: kingship and the Divine Right","Killing a king is against God and nature, so disorder follows (storms, strange omens). Good kings (Duncan, Edward) contrast with the tyrant Macbeth."],
+["Theme: masculinity","Lady Macbeth attacks Macbeth's manhood to push him to murder. Macbeth ends up linking being a man with violence."],
+["The dagger soliloquy","'Is this a dagger which I see before me?' - a hallucination showing his guilty, strained mind, and the supernatural pushing him towards murder."],
+["'Tomorrow, and tomorrow, and tomorrow'","After Lady Macbeth's death: 'Life's but a walking shadow, a poor player' - Macbeth feels life is meaningless; shows his despair and numbness."],
+["'I am in blood stepped in so far'","Macbeth says it's as hard to turn back as to keep going - he feels trapped in violence."],
+["Key imagery","Blood: guilt and violence.\nDarkness and night: evil and secrecy.\nSleep: peace and innocence ('Macbeth does murder sleep').\nBorrowed robes: Macbeth doesn't suit being king."],
+["Shakespeare's language and form","Soliloquies show private thoughts. Nobles speak in blank verse; Lady Macbeth's sleepwalking is in prose, showing her mind has broken down."],
+["Exam tip: Shakespeare question","One extract question: about 30 marks for the essay plus 4 for spelling, punctuation and grammar. Start with the extract, then link to the whole play."]
+]},
+"eng-jekyll":{s:"english",t:"Jekyll and Hyde",c:[
+["When was it written and by whom?","1886, by Robert Louis Stevenson. A Gothic novella set in Victorian London."],
+["Victorian context","Strict morality and respectability. Darwin's theory of evolution (1859) raised fears people could 'degenerate' back into animals. Science was also challenging religion."],
+["Genre: Gothic novella","A mystery with a dark setting, secrets, the supernatural and science. The truth is only revealed at the end."],
+["How is the novella structured?","Ten chapters, mostly seen through Utterson as he investigates. The truth comes only in the last two chapters: Lanyon's Narrative and Jekyll's Full Statement of the Case."],
+["Mr Utterson","A respectable, reserved, loyal lawyer - the 'detective' figure who tries to protect Jekyll's reputation.\n'If he be Mr Hyde, I shall be Mr Seek.'"],
+["Dr Henry Jekyll","Wealthy, respected doctor who wants to enjoy hidden desires without losing his reputation. His experiment goes wrong - he becomes addicted and loses control."],
+["Mr Edward Hyde","Jekyll's evil double - small, ugly, violent and without a conscience. Enfield says there's 'something wrong with his appearance'."],
+["Dr Lanyon","Jekyll's old friend and a rational scientist. He sees Hyde transform into Jekyll, is horrified and dies of shock."],
+["Mr Enfield","Utterson's relative who tells the story of Hyde trampling a girl in Chapter 1. He avoids gossip and scandal."],
+["Poole","Jekyll's loyal butler who fetches Utterson in Chapter 8 and helps break down the laboratory door."],
+["Sir Danvers Carew","A respected MP murdered by Hyde in the street - a violent, motiveless attack that shows Hyde's evil."],
+["Plot - Chapters 1 to 3","Enfield tells of Hyde trampling a child and paying with a cheque signed by Jekyll. Utterson finds Jekyll's will leaves everything to Hyde, so he investigates."],
+["Plot - Chapters 4 to 7","Hyde murders Carew. Jekyll says Hyde is gone. Lanyon dies after a shock. Jekyll shuts himself in his laboratory."],
+["Plot - Chapters 8 to 10","Poole fetches Utterson; they break into the lab and find Hyde dead in Jekyll's clothes. Lanyon's and Jekyll's letters reveal the truth."],
+["Theme: duality","'Man is not truly one, but truly two' (Jekyll). Everyone has good and evil sides; Victorian repression forces the evil side to hide."],
+["Theme: reputation and secrecy","Utterson and Enfield avoid scandal; Jekyll hides Hyde to protect his image: 'I stood already committed to a profound duplicity of life.'"],
+["Theme: science and religion","Science is shown as dangerous when it ignores morality - Jekyll's experiment 'plays God' and he loses control of it."],
+["Theme: good versus evil","Jekyll's pleasures start small and become cruelty. As Hyde gets stronger, Jekyll gets weaker."],
+["Theme: addiction","Jekyll becomes dependent on the potion, then transforms without it. He can't stop."],
+["Setting: Gothic London","Fog, darkness, back streets and closed doors. Fog hides crime and secrets; doors, windows and keys symbolise secrecy."],
+["Quote: Utterson on Hyde","'Satan's signature upon a face' - Utterson sees Hyde as truly evil, using a Gothic, religious image."],
+["Quote: the Carew murder","'ape-like fury' - links Hyde to an animal, reflecting Victorian fears of degeneration after Darwin."],
+["Quote: Enfield's story","'trampled calmly over the child's body' - the word 'calmly' shows Hyde's cold lack of conscience."],
+["Quote: Jekyll's confession","'my devil had been long caged, he came out roaring' - Jekyll's evil side grows stronger when he suppresses it."],
+["Narrative techniques","Several narrators, a letter inside a letter, and a delayed truth create mystery and suspense. We only hear Jekyll's own voice at the very end."],
+["Exam tip: 19th-century novel question","An extract question: about 30 marks for the essay plus 4 for spelling, punctuation and grammar. Link a quote from the extract to other moments (like Hyde's appearances) and to context."]
+]},
+"eng-lit-essay":{s:"english",t:"Literature essay skills",c:[
+["What does PEEL stand for?","Point → Evidence (short quote) → Explain / Effect → Link back to the question (and the writer's message)."],
+["What are the Literature assessment objectives?","AO1: ideas, argument and quotes\nAO2: the writer's methods (language, form, structure)\nAO3: context\nAO4: spelling, punctuation and grammar (on some questions)"],
+["How do you analyse a quote?","Zoom in on key words → what do they connote? → name the technique → effect on the reader → link to the writer's message."],
+["How do you use context well?","Link it to the writer's MESSAGE or the character's behaviour - don't just list facts."],
+["How should an essay start?","A clear argument that answers the question: 'Priestley presents … as … in order to show …'"],
+["Good analysis verbs","suggests · implies · connotes · conveys · reflects · highlights · reinforces · juxtaposes · exposes"],
+["How do you answer 'starting with this extract' questions?","Use the extract first, then link to other moments across the whole text."],
+["Poetry comparison connectives","Similarly · Likewise · Both poets · Whereas · In contrast · However · On the other hand"],
+["Poetry terms to know","stanza · rhyme scheme · enjambment · caesura · volta (turn) · free verse · dramatic monologue · sonnet · couplet · refrain"],
+["Planning and timing","Spend 3-5 minutes planning 3-4 paragraphs. Leave a few minutes to check spelling and punctuation at the end."],
+["Macbeth and Jekyll and Hyde essay tip","Don't retell the plot. Track one character or theme through the whole text and zoom in on the writer's words - then link to context."]
+]},
+"eng-lang-techniques":{s:"english",t:"Language techniques",c:[
+["Simile","Compares using 'like' or 'as'.\nHer smile was as bright as the sun."],
+["Metaphor","Says something IS something else.\nThe classroom was a zoo."],
+["Personification","Gives human qualities to non-human things.\nThe wind whispered."],
+["Alliteration","Repeated starting sounds.\nthe slithering, silent snake"],
+["Sibilance","Repeated 's' sounds - can sound soft, secretive or hissing."],
+["Onomatopoeia","A word that sounds like its meaning.\nbang, crash, sizzle"],
+["Anaphora","Repeating a word or phrase at the start of sentences or lines - builds emphasis or rhythm."],
+["Pathetic fallacy","Weather or setting that mirrors the mood.\nStorm clouds gathered as the argument grew."],
+["Juxtaposition","Placing opposite things side by side to create contrast."],
+["Oxymoron","Two opposite words together.\nbitter sweet · deafening silence"],
+["Hyperbole","Deliberate exaggeration.\nI've told you a million times."],
+["Semantic field","A group of words linked to the same theme (e.g. war: battle, weapon, trench)."],
+["Imperative","A command that directs the reader.\nListen. Act now."],
+["Rhetorical question","A question asked for effect, not for an answer."],
+["Tricolon (list of three)","Three words or phrases in a row - sounds balanced and memorable."],
+["Repetition","Repeating words or ideas to stress their importance."],
+["Emotive language","Words chosen to make you feel something - pity, anger, fear."],
+["Direct address","Talking straight to the reader using 'you'."],
+["Short sentences","Create tension, shock or emphasis; speed up the pace."],
+["Structure words: what to talk about","Shifts in focus · zooming in or out · flashback · foreshadowing · cyclical structure · change in pace or sentence length"],
+["Writing mnemonic: DAFOREST","Direct address · Alliteration · Facts · Opinion · Rhetorical question · Emotive language · Statistics · Triples"]
+]},
+"eng-lang-papers":{s:"english",t:"English Language exam guide",c:[
+["Paper 1 layout (fiction reading + creative writing)","Section A - one fiction extract:\nQ1 (4) · Q2 language (8) · Q3 structure (8) · Q4 evaluate (20)\nSection B - Q5 creative writing (40)"],
+["Paper 1 timing (1 hr 45 min)","Reading 15 min · Q1 5 min · Q2 10 min · Q3 10 min · Q4 20 min · Q5 45 min (including planning and checking)"],
+["Paper 2 layout (non-fiction viewpoints)","Section A - two non-fiction sources:\nQ1 true statements (4) · Q2 summary (8) · Q3 language (12) · Q4 compare (16)\nSection B - Q5 viewpoint writing (40)"],
+["Paper 1 Q1 (4 marks)","List four things from the part of the text. Short and quick - copy or paraphrase directly."],
+["Q2 / Q3 on Paper 1: what's the difference?","Q2 = LANGUAGE: words and techniques.\nQ3 = STRUCTURE: how the text is organised and where the focus moves."],
+["How to answer a language question","Pick short quotes → zoom into individual words → name the technique → explain the effect on the reader."],
+["Paper 1 Q4 (20 marks) - evaluate","Say how far you agree with the statement. Use evidence from the section named, and evaluate how the writer creates that effect."],
+["Paper 2 Q4 - comparing viewpoints","Compare BOTH writers' perspectives AND methods. Use words like 'whereas', 'similarly', 'in contrast'."],
+["Q5 writing (40 marks)","24 marks for content and organisation, 16 marks for spelling, punctuation and grammar. Plan, use paragraphs, vary sentences."],
+["Punctuation checklist","Capital letters · full stops · commas in lists and clauses · apostrophes · speech marks · colons and semi-colons · dashes or brackets for extra info"],
+["Before writing Q5: think A-F-P","Audience, Form (letter, article, speech…) and Purpose - then match your tone and vocabulary."]
+]},
+"sci-bio-cells":{s:"science",t:"Biology: Cell biology",c:[
+["Nucleus - what does it do?","Contains the DNA (genetic material) and controls the cell's activities."],
+["Mitochondria - what do they do?","Site of aerobic respiration - they release energy for the cell."],
+["Ribosomes - what do they do?","Where proteins are made (protein synthesis)."],
+["Chloroplasts - what do they do?","Contain chlorophyll and carry out photosynthesis (plant cells only)."],
+["Cell membrane, cell wall and vacuole","Membrane: controls what enters and leaves.\nCell wall (plants): made of cellulose, strengthens the cell.\nPermanent vacuole (plants): cell sap."],
+["How is a bacterial cell different?","No nucleus - DNA is a single loop floating in the cytoplasm, plus small rings called plasmids. Has a cell wall."],
+["Diffusion","The spreading out of particles from a region of HIGH concentration to LOW concentration. It's passive - no energy needed."],
+["Osmosis","The diffusion of WATER through a partially permeable membrane, from a dilute solution to a more concentrated solution."],
+["Active transport","Moves substances from LOW to HIGH concentration (against the gradient). Needs energy from respiration."],
+["What speeds up diffusion?","Bigger concentration difference · higher temperature · larger surface area"],
+["Mitosis","Cell division that makes two genetically identical cells. Used for growth, repair and replacing cells."],
+["Stem cells","Unspecialised cells that can turn into (differentiate into) other cell types. Used in medicine to replace damaged cells."],
+["Specialised cells: root hair cell","Long thin extension = big surface area to absorb water and minerals.\nLots of mitochondria for active transport."],
+["Magnification formula","Magnification = image size ÷ actual size"],
+["Light vs electron microscope","Electron microscope: much higher magnification and resolution - shows tiny structures like ribosomes and mitochondria."]
+]},
+"sci-bio-org":{s:"science",t:"Biology: Organisation",c:[
+["What is an enzyme?","A biological catalyst (a protein) that speeds up reactions without being used up."],
+["Why does an enzyme stop working at high temperature?","The active site changes shape - the enzyme is DENATURED, and the substrate no longer fits (lock and key)."],
+["Three digestive enzymes","Amylase: starch → sugars\nProtease: protein → amino acids\nLipase: fats (lipids) → fatty acids + glycerol"],
+["What does bile do?","Made in the liver, stored in the gall bladder. It neutralises stomach acid and EMULSIFIES fat to give a bigger surface area for lipase."],
+["Food test: starch and sugar","Starch: iodine turns orange → blue-black.\nSugar: Benedict's solution, heat → blue to brick red."],
+["Food test: protein and fat","Protein: Biuret turns blue → purple.\nFat: ethanol, then water → cloudy white emulsion."],
+["Route of blood through the heart","Vena cava → right atrium → right ventricle → pulmonary artery → lungs → pulmonary vein → left atrium → left ventricle → aorta."],
+["Double circulatory system","Right side pumps blood to the lungs. Left side pumps blood to the body. Blood passes through the heart twice per circuit."],
+["Arteries, veins and capillaries","Arteries: thick walls, carry blood away from the heart.\nVeins: thinner walls and valves, carry blood to the heart.\nCapillaries: one cell thick, exchange substances."],
+["Red blood cells","Carry oxygen using haemoglobin. Biconcave shape (big surface area) and no nucleus (more room)."],
+["White blood cells, platelets and plasma","White cells: fight pathogens.\nPlatelets: help blood clot.\nPlasma: liquid that carries cells, nutrients, CO₂ and hormones."],
+["Coronary heart disease","Fatty material builds up in the coronary arteries, narrowing them and cutting blood to the heart muscle.\nTreatments: stents and statins."],
+["Alveoli adaptations","Huge surface area, one cell thick walls, moist, rich blood supply - for fast gas exchange."],
+["Benign vs malignant tumours","Benign: stays in one place (in a membrane), not cancer.\nMalignant: invades other tissues and spreads in the blood - cancer."],
+["Cancer risk factors","Smoking · obesity · UV radiation · some viruses · genetic risk factors"],
+["Plant transport tissues","Xylem: carries water and minerals up.\nPhloem: carries sugars (food) around the plant.\nStomata: pores that let gases in and out."]
+]},
+"sci-bio-infection":{s:"science",t:"Biology: Infection and response",c:[
+["Four types of pathogen","Bacteria · viruses · fungi · protists"],
+["How do pathogens spread?","Air (droplets) · direct contact · water · food · animal vectors (e.g. mosquitoes)"],
+["Disease examples to know","Measles (virus) · HIV (virus) · Salmonella (bacteria) · Gonorrhoea (bacteria) · Malaria (protist) · Rose black spot (fungus) · Tobacco mosaic virus (plants)"],
+["Your body's non-specific defences","Skin · nose hairs and mucus · cilia in the trachea · stomach acid"],
+["How do white blood cells defend you?","1) Phagocytosis - engulf and digest pathogens\n2) Antibodies - lock onto pathogens\n3) Antitoxins - neutralise toxins"],
+["How does a vaccine work?","Contains a dead or weakened pathogen. Your body makes antibodies and memory cells, so a future infection is destroyed quickly."],
+["What is herd immunity?","When enough people are vaccinated that the pathogen can't spread easily, protecting those who are not vaccinated."],
+["Antibiotics: what can and can't they do?","Kill BACTERIA - they do NOT work on viruses.\nOverusing them causes antibiotic-resistant bacteria."],
+["Painkillers","Relieve symptoms but do not kill pathogens."],
+["Stages of drug development","Lab tests on cells and tissues → animal tests → clinical trials on volunteers/patients."],
+["Double-blind trial and placebo","Neither the patient nor the doctor knows who gets the real drug. A placebo has no active drug - used for fair comparison."],
+["Why does the spread of disease matter?","Poor hygiene, overcrowding and travel can spread pathogens fast - washing hands and vaccination reduce the spread."]
+]},
+"sci-bio-energetics":{s:"science",t:"Biology: Bioenergetics",c:[
+["Photosynthesis word equation","Carbon dioxide + water → glucose + oxygen\n(needs light energy, happens in chloroplasts)"],
+["Is photosynthesis endothermic or exothermic?","ENDOTHERMIC - it takes in energy from light."],
+["Three limiting factors of photosynthesis","Light intensity · carbon dioxide concentration · temperature (also the amount of chlorophyll)"],
+["Uses of the glucose a plant makes","Respiration · stored as starch · made into cellulose · fats and oils for seeds · proteins (with nitrates)"],
+["Aerobic respiration equation","Glucose + oxygen → carbon dioxide + water\n(releases energy - exothermic)"],
+["Anaerobic respiration in muscles","Glucose → lactic acid\n(no oxygen; releases less energy)"],
+["Anaerobic respiration in yeast (fermentation)","Glucose → ethanol + carbon dioxide\nUsed to make bread and alcohol."],
+["What is 'oxygen debt'?","The extra oxygen needed after exercise to break down lactic acid built up during anaerobic respiration."],
+["What happens to your body during exercise?","Heart rate and breathing rate increase to deliver more oxygen and remove CO₂ faster."],
+["What is metabolism?","The sum of all the chemical reactions in a cell or the body."],
+["Required practical: rate of photosynthesis","Pondweed in water under a lamp. Change the distance of the lamp and count bubbles of oxygen per minute. Keep other variables the same."]
+]},
+"sci-chem-atoms":{s:"science",t:"Chemistry: Atoms and the periodic table",c:[
+["Protons, neutrons, electrons: charge and mass","Proton: +1, mass 1\nNeutron: 0, mass 1\nElectron: −1, mass very small"],
+["Atomic number and mass number","Atomic number = number of protons\nMass number = protons + neutrons"],
+["What are isotopes?","Atoms of the SAME element (same protons) with DIFFERENT numbers of neutrons."],
+["How are electrons arranged?","In shells: 2 in the first, 8 in the second, 8 in the third (e.g. sodium = 2,8,1)."],
+["Elements, compounds and mixtures","Element: one type of atom.\nCompound: different atoms chemically bonded.\nMixture: not chemically joined, can be separated physically."],
+["Five ways to separate mixtures","Filtration · crystallisation · simple distillation · fractional distillation · chromatography"],
+["History of the atom (in order)","Dalton: solid spheres → Thomson: plum pudding → Rutherford: tiny positive nucleus (gold foil) → Bohr: electrons in shells → Chadwick: neutrons"],
+["Why is the periodic table arranged in groups?","Elements in a group have the same number of outer electrons, so similar properties. Group number = outer electrons."],
+["Group 1 (alkali metals)","Soft, low melting points. React with water to make hydrogen + metal hydroxide. Reactivity INCREASES down the group."],
+["Group 7 (halogens)","Diatomic molecules. Reactivity DECREASES down the group. Melting and boiling points increase down the group."],
+["Group 0 (noble gases)","Unreactive because they have full outer shells. Boiling points increase down the group."],
+["Metals vs non-metals","Metals: shiny, conduct, malleable, form positive ions.\nNon-metals: dull, brittle, poor conductors, form negative ions."],
+["How did Mendeleev arrange the table?","By atomic weight AND properties, leaving gaps for elements not yet discovered."]
+]},
+"sci-chem-bonding":{s:"science",t:"Chemistry: Bonding and structure",c:[
+["Ionic bonding","Metal + non-metal. Electrons are TRANSFERRED, forming positive and negative ions that attract strongly."],
+["Covalent bonding","Non-metals only. Atoms SHARE pairs of electrons."],
+["Metallic bonding","A lattice of positive metal ions in a 'sea' of delocalised electrons."],
+["Properties of ionic compounds","High melting and boiling points (strong forces). Conduct when melted or dissolved - the ions are free to move."],
+["Properties of simple molecules","Low melting and boiling points (weak forces BETWEEN molecules). Don't conduct electricity."],
+["Giant covalent structures","Diamond, graphite and silicon dioxide: very high melting points, strong covalent bonds throughout."],
+["Why does graphite conduct?","Each carbon bonds to 3 others, leaving one delocalised electron per atom that can carry charge."],
+["Why can metals be bent into shape?","Layers of ions can slide over each other."],
+["Why do metals conduct electricity?","Delocalised electrons carry charge through the metal."],
+["The three states of matter","Solid: fixed shape, particles vibrate.\nLiquid: flows, particles move around each other.\nGas: fills the container, particles move fast and far apart."],
+["Changes of state","Melting · freezing · boiling/evaporating · condensing · sublimation (solid → gas)"],
+["State symbols","(s) solid · (l) liquid · (g) gas · (aq) dissolved in water"]
+]},
+"sci-chem-changes":{s:"science",t:"Chemistry: Chemical and energy changes",c:[
+["Reactivity series (high to low)","Potassium, sodium, lithium, calcium, magnesium, aluminium, (carbon), zinc, iron, (hydrogen), copper, silver, gold"],
+["Displacement reactions","A more reactive metal pushes out a less reactive metal from its compound."],
+["Oxidation and reduction (OIL RIG)","Oxidation Is Loss of electrons, Reduction Is Gain.\nOxidation = gain of oxygen, reduction = loss of oxygen."],
+["Acid + metal →","Salt + hydrogen"],
+["Acid + metal oxide or hydroxide →","Salt + water"],
+["Acid + metal carbonate →","Salt + water + carbon dioxide"],
+["Naming salts","Hydrochloric acid → chlorides\nSulfuric acid → sulfates\nNitric acid → nitrates"],
+["pH scale and indicators","0-6 acid · 7 neutral · 8-14 alkali.\nAcids contain H⁺ ions, alkalis contain OH⁻ ions. Litmus: red in acid, blue in alkali."],
+["Electrolysis: what happens at each electrode?","Positive ions go to the cathode (−).\nNegative ions go to the anode (+).\nThe compound must be molten or dissolved."],
+["How is aluminium extracted?","Electrolysis of molten aluminium oxide, dissolved in cryolite to lower the melting point."],
+["Exothermic vs endothermic","Exothermic: releases energy, temperature RISES (burning, neutralisation).\nEndothermic: takes in energy, temperature FALLS (thermal decomposition)."],
+["Reaction profile: what does activation energy mean?","The minimum energy particles need to react - the 'hill' on the energy diagram."],
+["Relative formula mass (Mr)","Add up the Ar of all the atoms in the formula.\nMass is conserved in reactions - nothing is lost or gained."],
+["Concentration formula","Concentration (g/dm³) = mass of solute (g) ÷ volume (dm³)"],
+["Required practical: making a salt","Add excess insoluble base to warm acid → filter off the excess → heat the filtrate to crystallise → dry the crystals."]
+]},
+"sci-phys-energy":{s:"science",t:"Physics: Energy",c:[
+["Eight energy stores","Kinetic · gravitational potential · elastic potential · thermal · chemical · nuclear · magnetic · electrostatic"],
+["Four ways energy is transferred","Mechanically (forces) · electrically · by heating · by radiation (light or sound waves)"],
+["Conservation of energy","Energy cannot be created or destroyed - only transferred. Wasted energy usually spreads out (dissipates) as thermal energy."],
+["Kinetic energy formula","KE = ½ × mass × speed²\n(½mv²)"],
+["Gravitational potential energy formula","GPE = mass × gravitational field strength × height\n(mgh)"],
+["Elastic potential energy formula","Ee = ½ × spring constant × extension²\n(½ke²)"],
+["Power formulae","Power = energy transferred ÷ time\nPower = work done ÷ time\nUnit: watts (W)"],
+["Efficiency formula","Efficiency = useful output energy ÷ total input energy\n(× 100 for a percentage)"],
+["Specific heat capacity equation","Change in thermal energy = mass × specific heat capacity × temperature change\n(ΔE = mcΔθ)"],
+["How can you reduce unwanted energy transfers?","Lubrication (less friction) and thermal insulation (e.g. cavity wall insulation, thick walls)."],
+["Renewable energy resources","Solar · wind · hydroelectric · tidal · geothermal · biofuels (they can be replaced)"],
+["Non-renewable energy resources","Coal · oil · gas · nuclear fuel (they will run out)"],
+["Required practical: specific heat capacity","Heat a metal block with an electric heater, measure energy supplied and the temperature rise, insulate the block to reduce losses."]
+]},
+"sci-phys-electricity":{s:"science",t:"Physics: Electricity",c:[
+["What is electric current?","The rate of flow of charge.\nCharge = current × time  (Q = It)\nUnit: amps (A)"],
+["Potential difference (voltage)","The energy transferred per unit of charge. Measured in volts (V) with a voltmeter connected in PARALLEL."],
+["Ohm's law","Potential difference = current × resistance\nV = IR  (resistance in ohms, Ω)"],
+["Series circuits","Same current everywhere. Voltage is shared. Total resistance = add them up."],
+["Parallel circuits","Same voltage across each branch. Current splits. Total resistance is LESS than the smallest branch."],
+["Where do ammeters and voltmeters go?","Ammeter in SERIES.\nVoltmeter in PARALLEL."],
+["I-V graph: fixed resistor","A straight line through the origin - resistance is constant."],
+["I-V graph: filament lamp","A curve - resistance increases as the filament gets hotter."],
+["I-V graph: diode","Current flows in ONE direction only."],
+["LDR and thermistor","LDR: resistance falls as light increases.\nThermistor: resistance falls as temperature increases."],
+["Electrical power equations","P = IV\nP = I²R\nEnergy transferred E = Pt = QV"],
+["Mains electricity (UK)","230 V and 50 Hz, alternating current (AC). A battery gives direct current (DC)."],
+["Three wires in a plug","Live (brown) - 230 V, dangerous.\nNeutral (blue) - completes the circuit.\nEarth (green and yellow) - safety wire."],
+["What does a fuse or earth wire do?","Fuse: melts and breaks the circuit if the current is too big.\nEarth wire: stops the metal case becoming live."],
+["The National Grid","Step-up transformers raise voltage (so current is low and less energy is wasted as heat). Step-down transformers make it safe for homes."],
+["Static electricity","Rubbing transfers ELECTRONS. Same charges repel, opposite charges attract."]
+]},
+"sci-phys-particles":{s:"science",t:"Physics: Particles and radiation",c:[
+["Density formula","Density = mass ÷ volume"],
+["Particle arrangement in solids, liquids and gases","Solid: tightly packed, vibrating.\nLiquid: close, can move past each other.\nGas: far apart, random fast movement."],
+["What is internal energy?","The total kinetic and potential energy of all the particles in a substance."],
+["Specific latent heat","The energy needed to change the state of 1 kg without changing the temperature.\nEnergy = mass × latent heat  (Q = mL)"],
+["Gas pressure","Caused by particles hitting the container walls. Higher temperature = faster particles = higher pressure (at constant volume)."],
+["Physical vs chemical change","A change of state is a PHYSICAL change - it's reversible and the substance is the same."],
+["Size of an atom and its nucleus","Atom radius about 1 × 10⁻¹⁰ m. The nucleus is tiny - about 1/10 000 of the atom's radius."],
+["What is alpha radiation?","A helium nucleus (2 protons + 2 neutrons). Strongly ionising, stopped by paper or a few cm of air."],
+["What is beta radiation?","A fast-moving electron. Moderately ionising, stopped by thin aluminium."],
+["What is gamma radiation?","An electromagnetic wave. Weakly ionising, only reduced by thick lead or concrete."],
+["Definition of half-life","The time for the number of radioactive nuclei (or the count rate) to HALVE."],
+["Contamination vs irradiation","Contamination: radioactive material gets on or in you.\nIrradiation: exposed to radiation without the material touching you."],
+["Sources of background radiation","Natural: rocks (radon), cosmic rays, food.\nMan-made: medical, nuclear industry, weapons testing."],
+["How is radiation detected?","Geiger-Müller tube (counts radiation) or photographic film."],
+["Uses of radiation","Medical tracers, radiotherapy for cancer, smoke alarms, sterilising equipment, thickness gauges."]
+]},
+"span-identity":{s:"spanish",t:"Spanish: Me, family, free time and tech",c:[
+["my mum / my dad","mi madre / mi padre"],
+["my brother / my sister","mi hermano / mi hermana"],
+["my grandparents","mis abuelos"],
+["my best friend","mi mejor amigo / mi mejor amiga"],
+["My name is…","Me llamo…"],
+["I am 15 years old","Tengo quince años"],
+["I have brown hair","Tengo el pelo castaño"],
+["I have blue eyes","Tengo los ojos azules"],
+["kind / nice","simpático / simpática"],
+["funny","divertido / divertida"],
+["hard-working","trabajador / trabajadora"],
+["lazy","perezoso / perezosa"],
+["I get on well with…","Me llevo bien con…"],
+["I argue with…","Me peleo con…"],
+["I like / I love / I hate","Me gusta / Me encanta / Odio"],
+["I don't like … at all","No me gusta nada…"],
+["to play football","jugar al fútbol"],
+["to ride a bike","montar en bici"],
+["to go out with friends","salir con amigos"],
+["to watch TV","ver la tele"],
+["to listen to music","escuchar música"],
+["to surf the internet","navegar por Internet"],
+["social media","las redes sociales"],
+["to send messages","mandar mensajes"],
+["It is useful / It is dangerous","Es útil / Es peligroso"],
+["Christmas","la Navidad"],
+["Easter (Holy Week)","la Semana Santa"],
+["New Year's Eve","la Nochevieja"],
+["birthday","el cumpleaños"],
+["party / festival","la fiesta"]
+]},
+"span-local":{s:"spanish",t:"Spanish: Home, town, global issues and travel",c:[
+["I live in…","Vivo en…"],
+["my house / my flat","mi casa / mi piso"],
+["bedroom / kitchen / living room","el dormitorio / la cocina / el salón"],
+["garden","el jardín"],
+["town or village / city","el pueblo / la ciudad"],
+["There is / there are","Hay"],
+["There isn't / aren't any…","No hay…"],
+["shop / supermarket","la tienda / el supermercado"],
+["park / library","el parque / la biblioteca"],
+["sports centre","el polideportivo"],
+["town hall","el ayuntamiento"],
+["the environment","el medio ambiente"],
+["to recycle","reciclar"],
+["pollution","la contaminación"],
+["climate change","el cambio climático"],
+["poverty","la pobreza"],
+["to help","ayudar"],
+["holidays","las vacaciones"],
+["beach","la playa"],
+["suitcase","la maleta"],
+["ticket","el billete"],
+["airport","el aeropuerto"],
+["It's sunny","Hace sol"],
+["It's hot / It's cold","Hace calor / Hace frío"],
+["It's raining / It's snowing","Llueve / Nieva"],
+["Last year I went to Spain","El año pasado fui a España"],
+["Next summer I'm going to travel","El próximo verano voy a viajar"]
+]},
+"span-school":{s:"spanish",t:"Spanish: School, jobs and the future",c:[
+["school","el instituto"],
+["maths / English / science","las matemáticas / el inglés / las ciencias"],
+["PE","la educación física"],
+["teacher","el profesor / la profesora"],
+["homework","los deberes"],
+["exam","el examen"],
+["break time","el recreo"],
+["uniform","el uniforme"],
+["rules","las normas"],
+["to learn","aprender"],
+["My favourite subject is…","Mi asignatura favorita es…"],
+["I think … is difficult","Pienso que … es difícil"],
+["doctor","médico / médica"],
+["nurse","enfermero / enfermera"],
+["engineer","ingeniero / ingeniera"],
+["chef","cocinero / cocinera"],
+["hairdresser","peluquero / peluquera"],
+["I want to be…","Quiero ser…"],
+["In the future I'm going to…","En el futuro voy a…"],
+["I would like to study…","Me gustaría estudiar…"],
+["I'd like to work with children","Me gustaría trabajar con niños"],
+["salary","el sueldo"],
+["to earn money","ganar dinero"]
+]},
+"span-grammar":{s:"spanish",t:"Spanish: Verbs, tenses and connectives",c:[
+["Present tense: -AR verbs (hablar)","hablo · hablas · habla · hablamos · habláis · hablan"],
+["Present tense: -ER verbs (comer)","como · comes · come · comemos · coméis · comen"],
+["Present tense: -IR verbs (vivir)","vivo · vives · vive · vivimos · vivís · viven"],
+["SER (to be) - present","soy · eres · es · somos · sois · son\nUse for identity, personality, jobs"],
+["ESTAR (to be) - present","estoy · estás · está · estamos · estáis · están\nUse for location and feelings"],
+["TENER (to have)","tengo · tienes · tiene · tenemos · tenéis · tienen"],
+["IR (to go)","voy · vas · va · vamos · vais · van"],
+["HACER (to do / make)","hago · haces · hace · hacemos · hacéis · hacen"],
+["QUERER (to want) - stem changes","quiero · quieres · quiere · queremos · queréis · quieren"],
+["Preterite (past): -AR verbs","hablé · hablaste · habló · hablamos · hablasteis · hablaron"],
+["Preterite (past): -ER / -IR verbs","comí · comiste · comió · comimos · comisteis · comieron"],
+["Preterite of IR and SER (same!)","fui · fuiste · fue · fuimos · fuisteis · fueron"],
+["Near future","voy a + infinitive\nVoy a jugar al fútbol."],
+["Simple future","infinitive + é · ás · á · emos · éis · án\nhablaré = I will speak"],
+["Conditional","infinitive + ía · ías · ía · íamos · íais · ían\nMe gustaría = I would like"],
+["Giving opinions","Creo que… · Pienso que… · En mi opinión…\n+ porque (because)"],
+["Useful connectives","pero (but) · también (also) · además (as well) · por eso (so) · sin embargo (however)"],
+["Time phrases for past and future","Past: ayer, la semana pasada, el año pasado\nFuture: mañana, el próximo año, en el futuro"],
+["Me gusta or me gustan?","Me gusta + singular (me gusta el fútbol)\nMe gustan + plural (me gustan los deportes)"],
+["Writing tip: show variety","Include opinions, reasons, a past event and a future plan in every answer."]
+]},
+"pe-anatomy":{s:"pe",t:"PE Paper 1: Anatomy and physiology",c:[
+["Five functions of the skeleton","Support · Protection · Movement (levers) · Making blood cells · Storing minerals"],
+["Ball and socket vs hinge joints","Ball and socket (shoulder, hip): movement in all directions.\nHinge (elbow, knee, ankle): flexion and extension only."],
+["Joint movements","Flexion: angle decreases · Extension: angle increases · Abduction: away from the body · Adduction: towards the body · Rotation: turning · Circumduction: circular"],
+["Ankle movements","Plantar-flexion: pointing the toes down.\nDorsi-flexion: pulling the toes up."],
+["Ligament vs tendon","Ligament joins BONE to BONE.\nTendon joins MUSCLE to BONE."],
+["Cartilage and synovial fluid","Cartilage: covers bone ends, reduces friction, absorbs shock.\nSynovial fluid: lubricates the joint."],
+["Agonist and antagonist","Agonist (prime mover) contracts; antagonist relaxes. They work in pairs."],
+["Antagonistic muscle pairs","Biceps / triceps (elbow)\nQuadriceps / hamstrings (knee)\nHip flexors / gluteals (hip)\nGastrocnemius / tibialis anterior (ankle)"],
+["Isotonic vs isometric contraction","Isotonic: muscle changes length - concentric (shortens), eccentric (lengthens).\nIsometric: stays the same length (e.g. a plank)."],
+["Major muscles to name","Deltoid · pectorals · biceps · triceps · latissimus dorsi · trapezius · abdominals · gluteals · hip flexors · quadriceps · hamstrings · gastrocnemius · tibialis anterior"],
+["Slow vs fast twitch muscle fibres","Slow twitch: endurance, resist fatigue (e.g. marathon).\nFast twitch: speed and power, tire quickly (e.g. sprint)."],
+["First, second and third class levers","1st: fulcrum in the middle (nodding the head)\n2nd: load in the middle (calf raise)\n3rd: effort in the middle (biceps curl) - the most common"],
+["Planes and axes of movement","Sagittal plane / frontal axis: forwards-backwards (somersault)\nFrontal plane / sagittal axis: side to side (cartwheel)\nTransverse plane / longitudinal axis: rotation (twist)"],
+["Cardiac output","Cardiac output = stroke volume × heart rate"],
+["Arteries, veins and capillaries (PE)","Arteries: away from the heart, thick walls.\nVeins: back to the heart, valves.\nCapillaries: one cell thick, where exchange happens."],
+["Vasodilation and vasoconstriction","During exercise, blood vessels to the muscles widen (vasodilation) and those to the digestive system narrow (vasoconstriction)."],
+["How do you breathe in?","Diaphragm contracts and flattens, ribs move up and out, chest volume increases, pressure falls, air rushes in."],
+["Lung volumes","Tidal volume: air breathed in or out at rest.\nMinute ventilation = tidal volume × breathing rate.\nVital capacity: biggest breath out after the deepest breath in."],
+["Gas exchange at the alveoli","Oxygen diffuses into the blood and carbon dioxide diffuses out, across walls that are one cell thick."],
+["Aerobic vs anaerobic exercise","Aerobic: with oxygen, long and steady (marathon).\nAnaerobic: without oxygen, short and intense (sprint) - makes lactic acid."],
+["Short-term effects of exercise","Higher heart rate and breathing rate · sweating · muscle fatigue · lactic acid build-up"],
+["Long-term effects of exercise","Lower resting heart rate · bigger heart · muscle hypertrophy · stronger bones · better fitness"],
+["What is EPOC?","Excess post-exercise oxygen consumption - the extra oxygen needed to recover after exercise (oxygen debt)."]
+]},
+"pe-training":{s:"pe",t:"PE Paper 1: Fitness and training",c:[
+["Five health-related components of fitness","Cardiovascular fitness · muscular strength · muscular endurance · flexibility · body composition"],
+["Six skill-related components of fitness","Agility · balance · coordination · power · reaction time · speed"],
+["Define agility, balance and coordination","Agility: change direction quickly.\nBalance: keep your centre of mass over your base.\nCoordination: use body parts together smoothly."],
+["Define power, reaction time and speed","Power: strength × speed.\nReaction time: time to respond to a stimulus.\nSpeed: distance ÷ time."],
+["Fitness tests (1)","Cardiovascular: Cooper 12-minute run, multi-stage (bleep) test\nStrength: grip dynamometer\nMuscular endurance: 1-minute press-ups / sit-ups\nFlexibility: sit and reach"],
+["Fitness tests (2)","Agility: Illinois agility run\nBalance: standing stork\nPower: vertical jump\nReaction time: ruler drop\nSpeed: 30 m sprint"],
+["Principles of training: SPORT","Specificity · Progressive overload · Overload · Reversibility · Tedium"],
+["Principle of FITT","Frequency (how often) · Intensity (how hard) · Time (how long) · Type (which method)"],
+["Continuous training","Steady pace for 20+ minutes. Improves aerobic endurance."],
+["Fartlek training","'Speed play' - changing speed and terrain. Works aerobic and anaerobic systems."],
+["Interval training","Periods of hard work followed by rest or recovery. Improves speed and fitness."],
+["Circuit training","A series of stations, each with a different exercise. Can build strength, muscular endurance and cardiovascular fitness."],
+["Weight (resistance) training","High weight and low reps = strength.\nLow weight and high reps = muscular endurance."],
+["Plyometrics","Bounding, hopping and jumping exercises. Improves POWER."],
+["Heart rate training zones","Max heart rate = 220 − age\nAerobic zone: 60-80% of max\nAnaerobic zone: 80-90% of max"],
+["Warm-up stages","1) Pulse raiser\n2) Stretching\n3) Skill-related drills\nRaises muscle temperature and lowers injury risk."],
+["Cool-down","Gradually lowers heart rate, removes lactic acid and reduces muscle soreness (DOMS)."],
+["Types of stretching","Static: hold a position.\nDynamic: move through the range.\nBallistic: bouncing (risky).\nPNF: contract then relax, often with a partner."],
+["Sports injuries and RICE","Sprain (ligament) · strain (muscle or tendon) · fracture · dislocation · concussion.\nRICE: Rest, Ice, Compression, Elevation."],
+["Anabolic steroids","Build muscle and strength. Risks: liver damage, aggression, heart problems."],
+["Beta blockers and diuretics","Beta blockers: lower heart rate and steady hands (archery, shooting).\nDiuretics: remove water to lose weight or hide other drugs."],
+["Stimulants, narcotic analgesics and EPO","Stimulants: alertness, faster heart rate, addiction.\nNarcotic analgesics: hide pain, risk of worse injury.\nEPO: more red blood cells, but thick blood and stroke or heart attack risk."]
+]},
+"pe-psych":{s:"pe",t:"PE Paper 2: Psychology and socio-cultural",c:[
+["Basic vs complex skills","Basic: simple, few decisions (running).\nComplex: many decisions, lots of concentration (a rugby tackle)."],
+["Open vs closed skills","Open: the environment changes (a football pass).\nClosed: the same each time (a free throw)."],
+["Types of guidance","Visual (demonstration) · verbal (instructions) · manual (physical support) · mechanical (aids, e.g. floats)"],
+["Types of feedback","Intrinsic (how it felt) · extrinsic (from a coach) · positive · negative · knowledge of results · knowledge of performance"],
+["SMART targets","Specific · Measurable · Achievable · Realistic · Time-bound\n(check your school's version of the 'R')"],
+["Mental preparation techniques","Imagery · mental rehearsal · selective attention (focus on key cues) · positive self-talk"],
+["What is arousal?","How alert or 'psyched up' you are. Too low or too high can harm performance - there is an optimum level."],
+["Introvert vs extrovert","Introvert: quiet, prefers quiet and closed skills.\nExtrovert: outgoing, prefers team and open skills."],
+["Intrinsic vs extrinsic motivation","Intrinsic: from within (enjoyment, satisfaction).\nExtrinsic: from outside (trophies, money, praise)."],
+["Factors affecting participation","Family · peers · role models · media · access and facilities · gender · age · culture · disability · income"],
+["Commercialisation: the golden triangle","Sport, media and sponsorship all benefit each other.\nSponsors give money; the media brings coverage and viewers."],
+["Positives and negatives of sponsorship","Positives: money for clubs and equipment.\nNegatives: sponsors can control the sport, and unhealthy brands may be promoted."],
+["Sportsmanship, gamesmanship and deviance","Sportsmanship: fair play and respect.\nGamesmanship: bending the rules without breaking them (time wasting).\nDeviance: cheating or breaking the rules (drugs, violence)."],
+["Why do people use drugs in sport, and what's the risk?","To win or earn money. Risks: health damage, bans, and loss of fairness and reputation."],
+["Technology in sport","Examples: VAR, Hawk-Eye, wearable trackers.\nPros: fairer decisions, better performance.\nCons: cost, interrupts the game."],
+["Spectator violence (hooliganism)","Reduce it with segregation, CCTV, stewards, banning orders and alcohol controls."]
+]},
+"pe-health":{s:"pe",t:"PE Paper 2: Health, fitness and wellbeing",c:[
+["Definition of health","A state of complete physical, mental and social wellbeing - not just the absence of illness."],
+["Definition of fitness","The ability to meet the demands of your environment (daily life or sport)."],
+["Benefits of exercise: physical","Stronger heart and lungs · healthy weight · stronger bones and muscles · lower risk of disease"],
+["Benefits of exercise: mental","Reduces stress · releases endorphins · improves mood and self-esteem · helps sleep"],
+["Benefits of exercise: social","Make friends · teamwork · sense of belonging · reduces loneliness"],
+["Risks of a sedentary lifestyle","Weight gain · heart disease · type 2 diabetes · low mood"],
+["Three somatotypes","Ectomorph: thin, narrow (high jump, marathon).\nMesomorph: muscular, broad shoulders (sprinters, gymnasts).\nEndomorph: wider hips, more body fat (shot put, sumo)."],
+["Parts of a balanced diet","Carbohydrate: energy.\nProtein: growth and repair.\nFat: energy and insulation.\nVitamins and minerals · fibre · water"],
+["Effects of dehydration","Tiredness · cramp · headaches · reduced performance"],
+["What is energy balance?","Energy IN (food) vs energy OUT (activity). More in than out = weight gain."],
+["Use of data: what to do","Read the axes and units carefully, quote figures from the table or graph, and calculate means or percentages with your working shown."]
+]},
+"biz-marketing":{s:"business",t:"Enterprise: Marketing and starting up",c:[
+["What is an entrepreneur?","Someone who sets up and runs a business, taking the financial risk in the hope of a reward."],
+["Qualities of an entrepreneur","Risk-taker · creative · determined · hard-working · confident · resilient · good communicator"],
+["Why do people start a business?","Be their own boss · make money · follow a passion · fill a gap in the market"],
+["Common business aims","Survive · make a profit · grow · increase market share · customer satisfaction · ethical or social aims"],
+["Primary vs secondary market research","Primary: collected yourself (surveys, interviews, focus groups, observation).\nSecondary: already exists (internet, reports, government statistics)."],
+["Qualitative vs quantitative data","Qualitative: opinions and feelings.\nQuantitative: numbers and statistics."],
+["What is market segmentation?","Dividing customers into groups by age, gender, income, location or lifestyle, so you can target them."],
+["What is a USP?","Unique Selling Point - what makes your product different from the competition."],
+["The marketing mix (4 Ps)","Product · Price · Place · Promotion"],
+["Pricing strategies","Penetration: low price to win customers.\nSkimming: high price at launch.\nCompetitive: match rivals.\nCost-plus: cost + profit margin.\nPromotional: temporary discounts."],
+["Methods of promotion","Advertising · social media · PR · sales promotions (discounts) · direct marketing · sponsorship"],
+["What is 'place' in the marketing mix?","How the product reaches customers - shop, online, wholesaler, or direct."],
+["Product life cycle","Development → introduction → growth → maturity → decline.\nExtension strategies can delay decline (new packaging, new flavours)."],
+["Why is branding important?","A name, logo and slogan build recognition and customer loyalty."],
+["SWOT analysis","Strengths and Weaknesses are INTERNAL.\nOpportunities and Threats are EXTERNAL."],
+["Types of business ownership","Sole trader (unlimited liability) · partnership · private limited company (limited liability) · franchise · social enterprise"],
+["Who are stakeholders?","Anyone affected by a business: owners · employees · customers · suppliers · lenders · the community · the government"],
+["Purpose of a business plan","Sets out aims, market research and finance. Needed to persuade banks or investors to lend money."]
+]},
+"biz-finance":{s:"business",t:"Enterprise: Finance",c:[
+["Revenue formula","Revenue = selling price × quantity sold"],
+["Fixed vs variable costs","Fixed: stay the same (rent, insurance).\nVariable: change with output (materials).\nTotal costs = fixed + variable"],
+["Profit formula","Profit = revenue − total costs\n(a negative answer is a loss)"],
+["Gross profit and net profit","Gross profit = revenue − cost of sales\nNet profit = gross profit − expenses"],
+["What is break-even?","Where total revenue = total costs: no profit and no loss."],
+["Break-even output formula","Fixed costs ÷ (selling price − variable cost per unit)"],
+["Margin of safety","Actual sales − break-even sales"],
+["Cash flow forecast: key rules","Net cash flow = cash in − cash out\nClosing balance = opening balance + net cash flow\n(this month's closing = next month's opening)"],
+["Cash vs profit","Profit = revenue minus costs on paper. Cash = money actually in the bank. A profitable business can still run out of cash."],
+["Ways to improve cash flow","Ask customers to pay sooner · delay paying suppliers · overdraft · cut costs · sell unused assets"],
+["Sources of finance","Savings · family and friends · bank loan · overdraft · crowdfunding · business angels or investors · trade credit · retained profit"],
+["What is an overdraft?","Short-term borrowing from the bank to cover cash shortages - interest is charged."],
+["Break-even and changes","Higher price or lower costs = lower break-even point.\nHigher costs = higher break-even point."],
+["Why do small businesses fail?","Poor cash flow · weak planning · low demand · too much competition · poor management"]
+]}
+};
+
+
+var subjects={
+  math:{name:'Maths Higher',emoji:'&#128208;',board:'Edexcel Higher Tier (1MA1)',bg:'var(--math-bg)',t:'var(--math-t)',
+    blurb:'Edexcel GCSE Maths (Higher) has three 1 hr 30 min papers: Paper 1 is non-calculator, Papers 2 and 3 are calculator. Every topic can appear on every paper, so practise past papers and learn the formulae.',
+    websites:[{n:'Corbettmaths',u:'https://corbettmaths.com',d:'"5-a-day" daily questions and video tutorials for every topic',b:'Start here',f:true},{n:'Dr Frost Maths',u:'https://www.drfrostmaths.com',d:'Interactive lessons and a huge question bank - great for Higher tier',b:'Free',f:true},{n:'Maths Genie',u:'https://www.mathsgenie.co.uk/gcse.html',d:'Revision by topic and grade with exam questions and worked solutions',b:'Free',f:true},{n:'PMT - Edexcel past papers',u:'https://www.physicsandmathstutor.com/past-papers/gcse-maths/edexcel-paper-1',d:'Edexcel 1MA1 Higher past papers and mark schemes, with video solutions. This page is Paper 1 - Papers 2 and 3 are on the same site.',b:'Edexcel',f:true},{n:'Seneca Learning',u:'https://app.senecalearning.com',d:'Active recall maths courses - choose the Edexcel GCSE course when you sign in. Free tier covers a lot.',b:'Free',f:true}],
+    youtube:[{n:'Corbettmaths YouTube',u:'https://www.youtube.com/@corbettmaths',d:'Step-by-step video for every GCSE maths topic'},{n:'MathsWithJay',u:'https://www.youtube.com/@MathsWithJay',d:'Fast clear explanations - popular with GCSE students'}],
+    tiktoks:[{h:'@hannahkettlemaths',u:'https://www.tiktok.com/@hannahkettlemaths',d:'GCSE examiner - weekly free lessons, Higher tier focus'},{h:'@snaprevise',u:'https://www.tiktok.com/@snaprevise',d:'Bite-sized topic videos with great visuals'},{h:'#gcsemath',u:'https://www.tiktok.com/tag/gcsemath',d:'Browse for quick topic explainers'}],
+    tips:['Do Corbettmaths 5-a-day every revision day - 10 minutes keeps everything fresh.','Learn which formula to use for each topic - many marks are lost from wrong formula choice.','Attempt past paper questions before watching solutions. Struggling first means better memory.','Edexcel mark schemes give M (method), A (accuracy), B, P (process) and C (communication) marks - show your working so you collect method marks even if the answer is wrong.','Paper 1 is non-calculator: practise fractions, percentages, surds and leaving answers in terms of pi. Higher topics that always appear: quadratics, simultaneous equations, trigonometry, circle theorems.']},
+  english:{name:'English Lit and Lang',emoji:'&#128214;',board:'AQA',bg:'var(--eng-bg)',t:'var(--eng-t)',
+    blurb:'Two papers for Language, two for Literature. Your Literature texts are An Inspector Calls, Macbeth and Jekyll and Hyde. Technique and timing matter as much as content. Mr Bruff and Tassomai are your go-to resources.',
+    websites:[{n:'Mr Bruff YouTube',u:'https://www.youtube.com/@mrbruff',d:'The best GCSE English channel - AQA Language and Literature in depth',b:'Start here',f:true},{n:'Tassomai English',u:'https://www.tassomai.com/english',d:'Recommended by school - adaptive daily quiz targeting what you need most',b:'School rec',f:true},{n:'LitCharts',u:'https://www.litcharts.com',d:'Free summaries, themes and character analysis for all set texts',b:'Free',f:true},{n:'Seneca Learning',u:'https://app.senecalearning.com',d:'AQA English active recall courses - free tier is excellent',b:'Free',f:true},{n:'BBC Bitesize English',u:'https://www.bbc.co.uk/bitesize/examspecs/zcbchv4',d:'AQA-specific revision guides and practice questions',b:'Free',f:true},{n:'Physics and Maths Tutor',u:'https://www.physicsandmathstutor.com/english-revision/gcse-aqa',d:'AQA past papers and mark schemes for Language and Literature',b:'Free',f:true}],
+    youtube:[{n:'Mr Bruff',u:'https://www.youtube.com/@mrbruff',d:'Model answers, essay walkthroughs, exam technique - legendary channel'},{n:'The English Teacher',u:'https://www.tiktok.com/@theenglishteacher',d:'Quick technique tips and hitting top marks'}],
+    tiktoks:[{h:'@mrbruff',u:'https://www.tiktok.com/@mrbruff',d:'Short sharp English tips - yes he is on TikTok too'},{h:'@theenglishteacher',u:'https://www.tiktok.com/@theenglishteacher',d:'Language techniques and creative writing shortcuts'},{h:'#gcsemrbruff',u:'https://www.tiktok.com/tag/gcsemrbruff',d:'Community sharing tips and model answers'}],
+    tips:['For Language Paper 1, spend 15 mins reading and annotating before writing a single word.','Learn your language techniques cold: sibilance, anaphora, enjambment, pathetic fallacy.','For Literature: point, evidence, explain, effect. Always comment on the writers deliberate choice.','Learn key quotes for the big themes in all three texts: An Inspector Calls, Macbeth and Jekyll and Hyde. Ask your teacher which text(s) are on the mock.','For Language Paper 2, always compare HOW writers present ideas - not just WHAT they say.']},
+  science:{name:'Combined Science Trilogy',emoji:'&#128300;',board:'AQA Trilogy 8464 - Foundation Tier',bg:'var(--sci-bg)',t:'var(--sci-t)',
+    blurb:'Combined Science Foundation tier, course code 8464. Covers Biology, Chemistry and Physics. Sparx Science is the school primary revision tool - use it every week.',
+    websites:[{n:'Sparx Science',u:'https://www.sparxscience.com',d:'School tool - Independent Learning tab, select AQA GCSE, Biology 4.1-4.4, Chemistry 4.1-4.5, Physics 4.1-4.4',b:'School tool',f:true},{n:'FreeScienceLessons',u:'https://www.youtube.com/@Freesciencelessons',d:'AQA-specific videos for every topic - Shaun Donnelly is excellent and free',b:'Top pick',f:true},{n:'Oxford Revise Answers',u:'https://global.oup.com/education/content/secondary/key-issues/oxford-revise-science/answers/?region=uk',d:'Free answers for the Oxford Revise guide given out at school',b:'School guide',f:true},{n:'MME Revise',u:'https://mmerevise.co.uk',d:'Notes, recall questions and exam-style questions per topic - recommended by school',b:'Free',f:true},{n:'BBC Bitesize Science',u:'https://www.bbc.co.uk/bitesize/subjects/zgkw2hv',d:'Foundation-friendly topic guides with diagrams',b:'Free',f:true},{n:'Physics and Maths Tutor',u:'https://www.physicsandmathstutor.com/science-revision/combined-science-aqa',d:'AQA Combined Science past papers and revision notes',b:'Free',f:true}],
+    youtube:[{n:'FreeScienceLessons',u:'https://www.youtube.com/@Freesciencelessons',d:'Full AQA Combined Science playlists - Biology, Chemistry and Physics'},{n:'Primrose Kitten',u:'https://www.youtube.com/@PrimroseKitten',d:'Whole of AQA videos - great for going through a full topic in one go'}],
+    tiktoks:[{h:'@snaprevise',u:'https://www.tiktok.com/@snaprevise',d:'Science topic bite-sizes with strong visual explanations'},{h:'@draimee',u:'https://www.tiktok.com/@draimee',d:'Real science teacher - complex topics explained simply'},{h:'#gcsescience',u:'https://www.tiktok.com/tag/gcsescience',d:'Browse Combined Science revision shorts'}],
+    tips:['Sparx Science first - Independent Learning tab, AQA GCSE, Biology 4.1-4.4, Chemistry 4.1-4.5, Physics 4.1-4.4.','Use the Oxford Revise guide from school: cover answers, test yourself, add wrong ones to flashcards.','Required practicals appear in every paper - know the method, variables and what the results show.','Foundation tier rewards clear precise answers. Use correct scientific words in every answer.','Biology Paper 1 = Cell Biology, Organisation, Infection and Response, Bioenergetics.']},
+  spanish:{name:'Spanish',emoji:'&#127758;',board:'AQA',bg:'var(--span-bg)',t:'var(--span-t)',
+    blurb:'Four skills: Reading, Listening, Speaking and Writing. Vocab is the foundation of all of them. Little and often is the best approach.',
+    websites:[{n:'Seneca Learning',u:'https://app.senecalearning.com',d:'AQA Spanish vocabulary and grammar courses with recall testing',b:'Start here',f:true},{n:'BBC Bitesize Spanish',u:'https://www.bbc.co.uk/bitesize/subjects/zfckjxs',d:'Topic vocab, grammar guides and listening practice - fully free',b:'Free',f:true},{n:'Quizlet',u:'https://quizlet.com',d:'Make your own vocab flashcard sets - great for themes and verb tables',b:'Free',f:true},{n:'AQA Past Papers',u:'https://www.aqa.org.uk/subjects/languages/gcse/spanish-8698/assessment-resources',d:'Official AQA listening and reading past papers with mark schemes',b:'Official',f:true}],
+    youtube:[{n:'Sr Jordan',u:'https://www.youtube.com/@SrJordan',d:'Clear grammar and vocabulary explanations for GCSE Spanish'},{n:'Profe en casa',u:'https://www.youtube.com/@ProfeEnCasa',d:'Spanish listening and comprehension practice'}],
+    tiktoks:[{h:'@spanishwithalexandria',u:'https://www.tiktok.com/@spanishwithalexandria',d:'Quick grammar tips and vocab'},{h:'#gcseespanol',u:'https://www.tiktok.com/tag/gcseespanol',d:'GCSE Spanish revision shorts'},{h:'#spanishrevision',u:'https://www.tiktok.com/tag/spanishrevision',d:'Vocab, grammar and exam technique tips'}],
+    tips:['For listening: do past papers under timed conditions - pause only when the paper says to.','Oral exam: prepare 10-12 flexible sentences you can use across different topics.','Learn tenses in order: present, preterite, future, conditional. Those four cover most marks.','Reading paper: work from context if you do not know a word. Never leave anything blank.','Learn vocab in themed groups like family, school, environment rather than random lists.']},
+  pe:{name:'PE Theory',emoji:'&#127939;',board:'AQA',bg:'var(--pe-bg)',t:'var(--pe-t)',
+    blurb:'The written exam covers anatomy, physiology and training principles. Flashcards work brilliantly for this subject.',
+    websites:[{n:'Seneca Learning',u:'https://app.senecalearning.com',d:'AQA PE theory course - anatomy, training, health and fitness - free',b:'Start here',f:true},{n:'BBC Bitesize PE',u:'https://www.bbc.co.uk/bitesize/subjects/z97vrdm',d:'Clear revision guides for all PE theory topics - fully free',b:'Free',f:true},{n:'Physics and Maths Tutor PE',u:'https://www.physicsandmathstutor.com/pe-revision/gcse-aqa',d:'AQA PE past papers and topic notes',b:'Free',f:true},{n:'PE Revision YouTube',u:'https://www.youtube.com/@PERevision',d:'Short videos on muscles, joints, training methods and more',b:'Free',f:true}],
+    youtube:[{n:'PE Revision Channel',u:'https://www.youtube.com/@PERevision',d:'Covers the AQA PE spec topic by topic'},{n:'Mr Mitchell PE',u:'https://www.youtube.com/@MrMitchellPE',d:'PE teacher explaining theory in plain and memorable terms'}],
+    tiktoks:[{h:'#gcsepe',u:'https://www.tiktok.com/tag/gcsepe',d:'Quick anatomy and training method explainers'},{h:'#perevision',u:'https://www.tiktok.com/tag/perevision',d:'Short clips on key PE theory topics'}],
+    tips:['Muscles: know major muscles by name AND their antagonist pairs - quads and hamstrings, biceps and triceps.','Learn all components of fitness with a definition AND a sport-specific example for each.','Training principles FITT, specificity, overload, reversibility often appear as 3-mark questions.','Use subject vocabulary. The heart beats faster gets 1 mark. Cardiac output increases gets 3 marks.','Flashcards are perfect for PE - key term on front, definition and sport example on back.']},
+  business:{name:'Business and Enterprise BTEC',emoji:'&#128188;',board:'BTEC Level 2',bg:'var(--biz-bg)',t:'var(--biz-t)',
+    blurb:'BTEC is coursework plus an external exam. For the exam units, knowing key terminology and applying it to case studies is everything.',
+    websites:[{n:'Tutor2u Business',u:'https://www.tutor2u.net/business',d:'Excellent free topic guides, case studies and revision videos',b:'Start here',f:true},{n:'BBC Bitesize Business',u:'https://www.bbc.co.uk/bitesize/subjects/zpsvr82',d:'Covers enterprise, finance, marketing and operations clearly',b:'Free',f:true},{n:'Seneca Learning',u:'https://app.senecalearning.com',d:'Check for BTEC business courses - free tier',b:'Free',f:true},{n:'Tutor2u YouTube',u:'https://www.youtube.com/@tutor2ubusiness',d:'Video walkthroughs of key business topics',b:'Free',f:true}],
+    youtube:[{n:'Tutor2u Business',u:'https://www.youtube.com/@tutor2ubusiness',d:'Topic walkthroughs specific to BTEC business units'},{n:'Two Teachers',u:'https://www.youtube.com/@twoteachers',d:'Business exam technique and topic explanations'}],
+    tiktoks:[{h:'@tutor2u',u:'https://www.tiktok.com/@tutor2u',d:'Business and economics content in short form'},{h:'#gcsebusiness',u:'https://www.tiktok.com/tag/gcsebusiness',d:'Browse quick business theory explainers'},{h:'#btecbusiness',u:'https://www.tiktok.com/tag/btecbusiness',d:'BTEC-specific revision tips'}],
+    tips:['Learn key definitions: entrepreneur, cash flow, break-even, marketing mix, stakeholders.','Always apply your answer to the case study given - generic answers rarely get full marks.','Cash flow vs profit - know the difference and why a profitable business can still fail.','For evaluate or justify questions, always give both sides before reaching a conclusion.','The 4Ps Product, Price, Place, Promotion come up constantly - know a real-world example for each.']}
+};
+
+/* ===== LINKS ===== */
+var L={cm:{l:'Corbettmaths',u:'https://corbettmaths.com'},sen:{l:'Seneca',u:'https://app.senecalearning.com'},bru:{l:'Mr Bruff',u:'https://www.youtube.com/@mrbruff'},tas:{l:'Tassomai',u:'https://www.tassomai.com/english'},spx:{l:'Sparx Science',u:'https://www.sparxscience.com'},qz:{l:'Quizlet',u:'https://quizlet.com'},lit:{l:'LitCharts',u:'https://www.litcharts.com'},bpe:{l:'BBC Bitesize PE',u:'https://www.bbc.co.uk/bitesize/subjects/z97vrdm'},t2u:{l:'Tutor2u',u:'https://www.tutor2u.net/business'},drf:{l:'Dr Frost Maths',u:'https://www.drfrostmaths.com'},pmt:{l:'PMT',u:'https://www.physicsandmathstutor.com'},aqs:{l:'AQA Past Papers',u:'https://www.aqa.org.uk/subjects/languages/gcse/spanish-8698/assessment-resources'},bsp:{l:'BBC Bitesize Spanish',u:'https://www.bbc.co.uk/bitesize/subjects/zfckjxs'},fsl:{l:'FreeScienceLessons',u:'https://www.youtube.com/@Freesciencelessons'},mg:{l:'Maths Genie',u:'https://www.mathsgenie.co.uk/gcse.html'},bbc:{l:'BBC Bitesize',u:'https://www.bbc.co.uk/bitesize'}};
+
+/* ===== COLOURS ===== */
+var SC={math:{bg:'var(--math-bg)',t:'var(--math-t)'},english:{bg:'var(--eng-bg)',t:'var(--eng-t)'},science:{bg:'var(--sci-bg)',t:'var(--sci-t)'},spanish:{bg:'var(--span-bg)',t:'var(--span-t)'},pe:{bg:'var(--pe-bg)',t:'var(--pe-t)'},business:{bg:'var(--biz-bg)',t:'var(--biz-t)'},off:{bg:'var(--bg)',t:'var(--ink2)'}};
+
+/* ===== DATES (day names are CALCULATED from the date, so they can never drift) ===== */
+var MONTHS=['Jan','Feb','Mar','Apr','May','Jun','Jul','Aug','Sep','Oct','Nov','Dec'];
+var DAYN=['Sun','Mon','Tue','Wed','Thu','Fri','Sat'];
+function pd(s){var p=s.split('-');return new Date(+p[0],+p[1]-1,+p[2]);}
+function dl(s){var d=pd(s);return DAYN[d.getDay()]+' '+d.getDate()+' '+MONTHS[d.getMonth()];}
+function ymd(d){var m=d.getMonth()+1,x=d.getDate();return d.getFullYear()+'-'+(m<10?'0':'')+m+'-'+(x<10?'0':'')+x;}
+function dayNum(y,m,d){return Math.round(Date.UTC(y,m,d)/864e5);}
+
+/* ===== TIMETABLE ===== */
+var weeks=[
+{label:'Week 1 - 19 Oct',note:'<strong>Build the habit.</strong> 20 mins revision + 5 mins prep. One subject a day. Just get started.',sessions:[
+{d:'2026-10-19',c:'math',subj:'Maths',dur:'20 min',detail:'Number and algebra - Corbettmaths 5-a-day, then the Number and algebra flashcards.',links:[L.cm,L.sen],fc:['math-algebra']},
+{d:'2026-10-20',c:'english',subj:'English',dur:'20 min',detail:'Paper 1 reading skills - Mr Bruff video, then the English Language exam guide cards.',links:[L.bru,L.tas],fc:['eng-lang-papers']},
+{d:'2026-10-21',c:'science',subj:'Science',dur:'20 min',detail:'Cell biology - Sparx Science (Independent Learning), then the cell biology cards.',links:[L.spx,L.sen],fc:['sci-bio-cells']},
+{d:'2026-10-22',c:'spanish',subj:'Spanish',dur:'20 min',detail:'Me, family, free time and tech vocab - flashcards, then Seneca.',links:[L.sen,L.qz],fc:['span-identity']},
+{d:'2026-10-23',c:'off',subj:'Day off!',dur:'',detail:'Rest and recharge. No revision today - it is part of the plan.',links:[],fc:[]}
+]},
+{label:'Week 2 - 26 Oct',note:'<strong>Half term - push a little harder.</strong> 30 mins revision + 5 mins prep. Up to 2 subjects a day, weekend sessions start.',sessions:[
+{d:'2026-10-26',c:'pe',subj:'PE Theory',dur:'30 min',detail:'Components of fitness and training methods - BBC Bitesize, then the training flashcards.',links:[L.bpe,L.sen],fc:['pe-training']},
+{d:'2026-10-27',c:'business',subj:'Business + Maths',dur:'30 min',detail:'Enterprise key terms - flashcards (15 min), then Geometry - Corbettmaths (15 min).',links:[L.t2u,L.cm],fc:['biz-marketing','math-geometry']},
+{d:'2026-10-28',c:'science',subj:'Science + English',dur:'30 min',detail:'Organisation - Sparx (15 min), then An Inspector Calls themes (15 min).',links:[L.spx,L.lit],fc:['sci-bio-org','eng-aic']},
+{d:'2026-10-29',c:'spanish',subj:'Spanish + PE',dur:'30 min',detail:'Verb tenses (15 min), then muscles and joints flashcards (15 min).',links:[L.sen,L.bpe],fc:['span-grammar','pe-anatomy']},
+{d:'2026-10-30',c:'off',subj:'Day off!',dur:'',detail:'Rest up - you have earned it.',links:[],fc:[]},
+{d:'2026-10-31',c:'math',subj:'Maths + English',dur:'30 min',detail:'Algebra recap (15 min), then Macbeth cards (15 min). Then enjoy Halloween!',links:[L.cm,L.lit],fc:['math-algebra','eng-macbeth']},
+{d:'2026-11-01',c:'science',subj:'Science + Spanish',dur:'30 min',detail:'Bonding - Sparx (15 min), then town and travel vocab cards (15 min).',links:[L.spx,L.qz],fc:['sci-chem-bonding','span-local']}
+]},
+{label:'Week 3 - 2 Nov',note:'<strong>Closing the gaps.</strong> 35 mins per subject with a 15 min break between them (about 85 mins on a two-subject day). Your day off this week is Saturday 7 Nov, not Friday.',sessions:[
+{d:'2026-11-02',c:'math',subj:'Maths + Science',blocks:[{m:35,t:'Statistics and probability - Corbettmaths, then the statistics flashcards'},{b:15},{m:35,t:'Infection and response - Sparx Science, then the infection flashcards'}],links:[L.cm,L.spx],fc:['math-stats','sci-bio-infection']},
+{d:'2026-11-03',c:'english',subj:'English + Business',blocks:[{m:35,t:'Jekyll and Hyde - themes and quotes, with Mr Bruff and the flashcards'},{b:15},{m:35,t:'Cash flow and profit - Tutor2u and the finance flashcards'}],links:[L.bru,L.t2u],fc:['eng-jekyll','biz-finance']},
+{d:'2026-11-04',c:'spanish',subj:'Spanish + PE',blocks:[{m:35,t:'Writing practice - a timed task, then the verbs and tenses flashcards'},{b:15},{m:35,t:'Training methods - Seneca and the training flashcards'}],links:[L.bsp,L.sen],fc:['span-grammar','pe-training']},
+{d:'2026-11-05',c:'science',subj:'Science + Maths',blocks:[{m:35,t:'Bioenergetics - Sparx, then the bioenergetics flashcards'},{b:15},{m:35,t:'Geometry flashcards and past paper questions - Dr Frost'}],links:[L.spx,L.drf],fc:['sci-bio-energetics','math-geometry']},
+{d:'2026-11-06',c:'english',subj:'English + PE',blocks:[{m:35,t:'Language techniques - Mr Bruff and the techniques flashcards'},{b:15},{m:35,t:'Components of fitness - the PE training flashcards'}],links:[L.bru,L.sen],fc:['eng-lang-techniques','pe-training']},
+{d:'2026-11-07',c:'off',subj:'Day off!',dur:'',detail:'Your day off this week (swapped with Friday). Enjoy it!',links:[],fc:[]},
+{d:'2026-11-08',c:'math',subj:'Maths + Business',blocks:[{m:35,t:'Higher algebra and graphs - Dr Frost and the flashcards'},{b:15},{m:35,t:'Marketing mix - Tutor2u and the marketing flashcards'}],links:[L.drf,L.t2u],fc:['math-higher','biz-marketing']}
+]},
+{label:'Week 4 - 9 Nov',note:'<strong>Final push before mocks.</strong> 45 mins per subject with a 15 min break between them (about 105 mins on a two-subject day).',sessions:[
+{d:'2026-11-09',c:'math',subj:'Maths + English',blocks:[{m:45,t:'Edexcel past paper questions - PMT, with the exam guide flashcards'},{b:15},{m:45,t:'English Language paper guide - Mr Bruff and the flashcards'}],links:[L.pmt,L.bru],fc:['math-exam','eng-lang-papers']},
+{d:'2026-11-10',c:'science',subj:'Science + Business',blocks:[{m:45,t:'Chemistry Paper 1 topics - Sparx, then the chemistry flashcards'},{b:15},{m:45,t:'4Ps marketing - Tutor2u and the marketing flashcards'}],links:[L.spx,L.t2u],fc:['sci-chem-changes','biz-marketing']},
+{d:'2026-11-11',c:'spanish',subj:'Spanish + PE',blocks:[{m:45,t:'Listening past paper - AQA'},{b:15},{m:45,t:'Anatomy - the PE anatomy flashcards'}],links:[L.aqs,L.sen],fc:['span-school','pe-anatomy']},
+{d:'2026-11-12',c:'math',subj:'Mixed review',blocks:[{m:45,t:'Weakest Maths and English topics - plus any flashcards marked still learning'},{b:15},{m:45,t:'Weakest Science, Spanish and PE topics - check your Seneca red areas'}],links:[L.sen,L.bbc],fc:[]},
+{d:'2026-11-13',c:'off',subj:'Day off!',dur:'',detail:'Final rest before mocks. Early night. You have got this.',links:[],fc:[]},
+{d:'2026-11-14',c:'math',subj:'Maths + English Lit',blocks:[{m:45,t:'Maths non-calculator practice'},{b:15},{m:45,t:'English Literature cards - start with the text(s) your teacher says are on the paper. Your first two exams are Monday and Tuesday.'}],links:[L.cm,L.lit],fc:['math-algebra','eng-aic','eng-macbeth','eng-jekyll']}
+]},
+{label:'Week 5 - Exams 16 Nov',note:'<strong>Exam week 1.</strong> Every evening you revise for TOMORROW\'s exams (20 mins for one subject, 30 mins when there are two). Then rest.',sessions:[
+{d:'2026-11-15',c:'math',subj:'Revise: Maths non-calculator',dur:'20 min',detail:'Tonight: quick recap of non-calculator topics (Edexcel Paper 1). Then an early night - exam tomorrow at 09:00.',links:[L.cm,L.mg],fc:['math-exam','math-algebra','math-geometry']},
+{d:'2026-11-16',c:'english',subj:'Revise: English Literature',dur:'20 min',exam:'Maths non-calculator, 09:00 (W031, seat O8)',detail:'Tonight: skim themes, characters and key quotes - start with the text(s) on tomorrow\'s paper. Then rest.',links:[L.lit,L.bru],fc:['eng-aic','eng-macbeth','eng-jekyll','eng-lit-essay']},
+{d:'2026-11-17',c:'spanish',subj:'Revise: Spanish Reading + Listening',dur:'20 min',exam:'English Literature, 09:00 (W031, seat AA8)',detail:'Tonight: vocab and key phrases for tomorrow afternoon. Then rest.',links:[L.sen,L.qz],fc:['span-identity','span-local','span-school']},
+{d:'2026-11-18',c:'math',subj:'Revise: Maths calculator Paper 2',dur:'20 min',exam:'Spanish Reading 13:30 and Listening 14:30 (L103 ICT, seat C7)',detail:'Tonight: Edexcel Paper 2 (calculator) - geometry, trigonometry and probability. Then rest.',links:[L.cm,L.drf],fc:['math-geometry','math-stats','math-exam']},
+{d:'2026-11-19',c:'english',subj:'Revise: English Language + PE Paper 1',dur:'30 min',exam:'Maths calculator Paper 2, 09:00 (W031, seat O8)',detail:'Tonight: language techniques (15 min), then PE anatomy and training cards (15 min). Both are tomorrow.',links:[L.bru,L.bpe],fc:['eng-lang-techniques','pe-anatomy','pe-training']},
+{d:'2026-11-20',c:'off',subj:'Day off!',dur:'',exam:'English Language 09:00 and PE Paper 1 13:30 (W031)',detail:'Exams done for the week - no revision tonight. Rest, eat well and enjoy the weekend.',links:[],fc:[]}
+]},
+{label:'Week 6 - Exams 23 Nov',note:'<strong>Exam week 2.</strong> Same approach - revise tonight for tomorrow\'s exams, then rest. Nearly there!',sessions:[
+{d:'2026-11-21',c:'science',subj:'Biology (cells and organisation)',dur:'30 min',detail:'Cell biology and organisation - Sparx plus flashcards. Biology is Monday morning.',links:[L.spx,L.fsl],fc:['sci-bio-cells','sci-bio-org']},
+{d:'2026-11-22',c:'science',subj:'Revise: Biology + Spanish Writing',dur:'30 min',detail:'Tonight: infection and bioenergetics (15 min), then Spanish writing phrases and tenses (15 min). Both are tomorrow.',links:[L.spx,L.bsp],fc:['sci-bio-infection','sci-bio-energetics','span-grammar']},
+{d:'2026-11-23',c:'science',subj:'Revise: Chemistry',dur:'20 min',exam:'Biology 09:00 and Spanish Writing 13:30 (W031, seat N4)',detail:'Tonight: atomic structure, bonding and chemical changes. Then rest.',links:[L.spx,L.fsl],fc:['sci-chem-atoms','sci-chem-bonding','sci-chem-changes']},
+{d:'2026-11-24',c:'math',subj:'Revise: Maths Paper 3 + Enterprise and Marketing',dur:'30 min',exam:'Chemistry, 09:00 (W031, seat N4)',detail:'Tonight: maths calculator topics (15 min), then marketing and finance cards (15 min). Both are tomorrow.',links:[L.cm,L.t2u],fc:['math-stats','biz-marketing','biz-finance']},
+{d:'2026-11-25',c:'science',subj:'Revise: Physics + PE Paper 2',dur:'30 min',exam:'Maths Paper 3 09:00 and Enterprise and Marketing 13:30 (W031)',detail:'Tonight: energy, electricity and radiation (15 min), then PE psychology and health cards (15 min). Both are tomorrow.',links:[L.spx,L.fsl],fc:['sci-phys-energy','sci-phys-electricity','pe-psych']},
+{d:'2026-11-26',c:'pe',subj:'Mocks complete!',dur:'',exam:'Physics 09:00 and PE Paper 2 13:30 (W031)',detail:'Last two exams today. Well done Alex - go and celebrate!',links:[],fc:[]}
+]}
+];
+
+function blkTotals(b){var st=0,br=0;for(var i=0;i<b.length;i++){if(b[i].b)br+=b[i].b;else st+=b[i].m;}return {st:st,br:br};}
+function blocksHtml(b){var h='';for(var i=0;i<b.length;i++){if(b[i].b)h+='<div class="blk brk">&#9749; '+b[i].b+' min break - water, stretch, no phone!</div>';else h+='<div class="blk"><span class="bm">'+b[i].m+' min</span><span>'+b[i].t+'</span></div>';}return h;}
+function sessDetail(s){return s.blocks?blocksHtml(s.blocks):s.detail;}
+function sessDur(s){if(s.blocks){var t=blkTotals(s.blocks);return t.st+' min study + '+t.br+' min break';}return s.dur;}
+function deckTitle(k){return DECKS[k]?DECKS[k].t:k;}
+function fcButtons(keys,cls){var h='';for(var i=0;i<keys.length;i++){if(DECKS[keys[i]])h+='<button class="'+cls+'" data-fc="'+keys[i]+'">&#127183; '+deckTitle(keys[i])+'</button>';}return h;}
+function linkTags(links,col,cls){var h='';for(var j=0;j<links.length;j++){h+='<a class="'+cls+'" href="'+links[j].u+'" target="_blank" rel="noopener" style="color:'+col+';border-color:'+col+'">'+links[j].l+' &rarr;</a>';}return h;}
+
+var aw=0;
+function renderTT(){
+  var th='';
+  for(var i=0;i<weeks.length;i++)th+='<button class="wtab'+(i===aw?' active':'')+'" onclick="setW('+i+')">'+weeks[i].label+'</button>';
+  document.getElementById('wtabs').innerHTML=th;
+  document.getElementById('wnote').innerHTML=weeks[aw].note;
+  var sh='',ss=weeks[aw].sessions;
+  for(var i=0;i<ss.length;i++){
+    var s=ss[i],off=s.c==='off',col=SC[s.c];
+    var h='<div class="session-card'+(off?' day-off':'')+'" style="'+(off?'':'background:'+col.bg+';color:'+col.t+';')+'">';
+    h+='<div class="s-day">'+dl(s.d)+'</div>';
+    if(s.exam)h+='<div><span class="exam-badge">Exam</span></div><div class="exam-line">'+s.exam+'</div>'+(off?'':'<div class="tonight">Tonight&#39;s revision</div>');
+    h+='<div class="s-subj">'+s.subj+'</div><div class="s-detail">'+sessDetail(s)+'</div>';
+    if(sessDur(s))h+='<div class="s-dur">&#9203; '+sessDur(s)+'</div>';
+    if(s.fc&&s.fc.length)h+='<div class="s-links">'+fcButtons(s.fc,'s-fc')+'</div>';
+    if(s.links&&s.links.length)h+='<div class="s-links">'+linkTags(s.links,off?'var(--ink2)':col.t,'s-link')+'</div>';
+    sh+=h+'</div>';
+  }
+  document.getElementById('sgrid').innerHTML=sh;
+}
+function setW(i){aw=i;renderTT();}
+
+/* ===== TODAY PANEL ===== */
+function allSessions(){var a=[];for(var i=0;i<weeks.length;i++)for(var j=0;j<weeks[i].sessions.length;j++)a.push(weeks[i].sessions[j]);return a;}
+function renderToday(){
+  var panel=document.getElementById('today-panel'),now=new Date(),ts=ymd(now),all=allSessions(),cur=null,next=null;
+  for(var i=0;i<all.length;i++){if(all[i].d===ts)cur=all[i];if(!next&&all[i].d>ts&&all[i].c!=='off')next=all[i];}
+  var h='<div class="today-label">&#128197; Today\'s revision session</div><div class="today-date">'+DAYN[now.getDay()]+' '+now.getDate()+' '+MONTHS[now.getMonth()]+' '+now.getFullYear()+'</div>';
+  if(cur){
+    var col=SC[cur.c];panel.style.borderColor=col.t;
+    if(cur.exam)h+='<div><span class="exam-badge">Exam today</span></div><div class="exam-line">'+cur.exam+'</div>'+(cur.c==='off'||cur.c==='pe'&&!cur.fc.length?'':'<div class="tonight">Tonight&#39;s revision</div>');
+    h+='<div class="today-subj" style="color:'+col.t+'">'+cur.subj+'</div><div class="today-detail">'+sessDetail(cur)+'</div>';
+    if(sessDur(cur))h+='<div class="today-detail" style="margin-top:-6px">&#9203; '+sessDur(cur)+'</div>';
+    h+='<div class="today-btns" style="margin-bottom:8px">'+fcButtons(cur.fc||[],'fc-link')+'</div>';
+    if(cur.links&&cur.links.length){h+='<div class="today-btns">';for(var j=0;j<cur.links.length;j++)h+='<a class="today-link" style="background:'+col.t+'" href="'+cur.links[j].u+'" target="_blank" rel="noopener">'+cur.links[j].l+' &rarr;</a>';h+='</div>';}
+  } else {
+    panel.style.borderColor='var(--accent)';
+    if(ts>all[all.length-1].d){h+='<div class="today-subj">Mocks complete!</div><div class="today-detail">Brilliant work, Alex. Now rest and recharge.</div>';}
+    else if(next){h+='<div class="today-subj">No session today</div><div class="today-detail">Enjoy the time off. Next up: <strong>'+dl(next.d)+' - '+next.subj+'</strong>.</div>';}
+    else{h+='<div class="today-subj">No session today</div><div class="today-detail">Check the Timetable tab for the full plan.</div>';}
+  }
+  panel.innerHTML=h;
+}
+
+/* ===== COUNTDOWN (uses calendar days, so clock changes can't throw it out) ===== */
+function renderCountdown(){
+  var n=new Date(),diff=dayNum(2026,10,16)-dayNum(n.getFullYear(),n.getMonth(),n.getDate());
+  var el=document.getElementById('cd-days'),lb=document.getElementById('cd-lbl');
+  if(diff>0){el.textContent=diff;lb.textContent=diff===1?'day to go!':'days to go';}
+  else if(diff<=0&&ymd(n)<=weeks[5].sessions[5].d){el.textContent='GO!';lb.textContent='Mocks are on - good luck Alex!';}
+  else{el.textContent='Done!';lb.textContent='Mocks complete!';}
+}
+
+/* ===== NAVIGATION ===== */
+function setNav(n){var b=document.querySelectorAll('nav button');for(var i=0;i<b.length;i++){b[i].classList.toggle('active',b[i].getAttribute('data-nav')===n);}}
+function hidePages(){var p=document.querySelectorAll('.page');for(var i=0;i<p.length;i++)p[i].classList.remove('active');}
+function showPage(id){hidePages();document.getElementById('page-'+id).classList.add('active');setNav(id);window.scrollTo(0,0);}
+function showSubject(id){hidePages();document.getElementById('page-subject').classList.add('active');document.getElementById('subj-content').innerHTML=buildSubject(id);setNav(id);window.scrollTo(0,0);}
+function deckKeys(s){var a=[];for(var k in DECKS){if(DECKS[k].s===s)a.push(k);}return a;}
+function buildSubject(id){
+  var s=subjects[id];if(!s)return '';
+  var bs='background:'+s.bg+';color:'+s.t+';';
+  var h='<div class="subject-header" style="'+bs+'"><div style="font-size:2.5rem;margin-bottom:8px">'+s.emoji+'</div><h2>'+s.name+'</h2><div class="board-tag">'+s.board+'</div><p>'+s.blurb+'</p></div>';
+  var dk=deckKeys(id);
+  if(dk.length){h+='<div class="resource-section"><h3>&#127183; Flashcard decks</h3><div class="deck-btns">';for(var i=0;i<dk.length;i++)h+='<button class="deck-btn" style="color:'+s.t+'" data-fc="'+dk[i]+'">'+DECKS[dk[i]].t+' ('+DECKS[dk[i]].c.length+')</button>';h+='</div></div>';}
+  h+='<div class="resource-section"><h3>&#127760; Websites and revision tools</h3><div class="link-cards">';
+  for(var i=0;i<s.websites.length;i++){var r=s.websites[i];h+='<a class="link-card" href="'+r.u+'" target="_blank" rel="noopener"><span class="lc-badge" style="'+bs+'">'+r.b+'</span><div class="lc-name">'+r.n+'</div><div class="lc-desc">'+r.d+'</div><span class="free-note">'+(r.f?'&#10003; Free to use':'Check school access')+'</span></a>';}
+  h+='</div></div><div class="resource-section"><h3>&#9654;&#65039; YouTube channels</h3><div class="link-cards">';
+  for(var i=0;i<s.youtube.length;i++){var r=s.youtube[i];h+='<a class="link-card" href="'+r.u+'" target="_blank" rel="noopener"><div class="lc-name">'+r.n+'</div><div class="lc-desc">'+r.d+'</div><span class="free-note">&#10003; Free to use</span></a>';}
+  h+='</div></div><div class="resource-section"><h3>&#128241; TikTok accounts and hashtags</h3><div class="tiktok-row">';
+  for(var i=0;i<s.tiktoks.length;i++)h+='<a class="tt-chip" href="'+s.tiktoks[i].u+'" target="_blank" rel="noopener"><div class="tt-icon"></div>'+s.tiktoks[i].h+'</a>';
+  h+='</div><div class="tt-desc-row" style="margin-top:8px">';
+  for(var i=0;i<s.tiktoks.length;i++){if(i>0)h+=' &middot; ';h+='<strong>'+s.tiktoks[i].h+'</strong> - '+s.tiktoks[i].d;}
+  h+='</div></div><div class="resource-section"><h3>&#128161; Top tips for this subject</h3><div class="tips-grid">';
+  for(var i=0;i<s.tips.length;i++)h+='<div class="tip-card" data-n="'+(i+1)+'">'+s.tips[i]+'</div>';
+  return h+'</div></div>';
+}
+
+/* ===== FLASHCARDS ===== */
+var FCN={math:'&#128208; Maths',english:'&#128214; English',science:'&#128300; Science',spanish:'&#127758; Spanish',pe:'&#127939; PE',business:'&#128188; Business'};
+var fc={subj:'math',key:null,order:[],i:0,swap:false,only:false};
+var fcMem=null;
+function fcProg(){if(!fcMem){try{fcMem=JSON.parse(localStorage.getItem('alexfc2')||'{}')||{};}catch(e){fcMem={};}}return fcMem;}
+function fcSave(){try{localStorage.setItem('alexfc2',JSON.stringify(fcMem));}catch(e){}}
+function fcMarkOf(k,i){var p=fcProg();return(p[k]&&p[k][i])?p[k][i]:0;}
+function fcLearned(k){var p=fcProg()[k]||{},n=0;for(var x in p){if(p[x]===1)n++;}return n;}
+function fcSubjects(){
+  var h='';for(var s in FCN){var c=SC[s];h+='<button class="fc-chip'+(s===fc.subj?' sel':'')+'" style="background:'+c.bg+';color:'+c.t+'" onclick="fcSubject(\''+s+'\')">'+FCN[s]+'</button>';}
+  document.getElementById('fc-subjects').innerHTML=h;
+}
+function fcDecks(){
+  var ks=deckKeys(fc.subj),h='';
+  for(var i=0;i<ks.length;i++){var d=DECKS[ks[i]];h+='<button class="fc-deck'+(ks[i]===fc.key?' sel':'')+'" onclick="fcOpen(\''+ks[i]+'\')"><span class="dt">'+d.t+'</span><span class="dm">'+d.c.length+' cards &middot; &#10003; '+fcLearned(ks[i])+' learned</span></button>';}
+  document.getElementById('fc-decks').innerHTML=h;
+}
+function showFlash(key){
+  hidePages();document.getElementById('page-flash').classList.add('active');setNav('flash');window.scrollTo(0,0);
+  if(key&&DECKS[key])fcOpen(key);else fcSubject(fc.subj);
+}
+function fcSubject(s){fc.subj=s;fc.key=null;document.getElementById('fc-study').style.display='none';fcSubjects();fcDecks();}
+function fcBuild(){fc.order=[];var d=DECKS[fc.key];for(var i=0;i<d.c.length;i++){if(!fc.only||fcMarkOf(fc.key,i)!==1)fc.order.push(i);}}
+function fcOpen(key){fc.key=key;fc.subj=DECKS[key].s;fc.only=false;fc.i=0;fcBuild();document.getElementById('fc-study').style.display='block';fcSubjects();fcDecks();fcRender(true);}
+function fcRender(instant){
+  var d=DECKS[fc.key],card=document.getElementById('fc-card'),col=SC[d.s];
+  document.getElementById('fc-title').textContent=d.t;
+  document.getElementById('fc-back').style.background=col.bg;document.getElementById('fc-back').style.color=col.t;
+  document.getElementById('fc-front').style.borderColor=col.t;
+  var wasFlipped=card.classList.contains('flipped');card.classList.remove('flipped');
+  var q,a,cnt;
+  if(!fc.order.length){q='All done - you have got every card! \uD83C\uDF89';a='Tap "Clear my ticks" to start again.';cnt='0 cards left';}
+  else{var pair=d.c[fc.order[fc.i]];q=fc.swap?pair[1]:pair[0];a=fc.swap?pair[0]:pair[1];cnt='Card '+(fc.i+1)+' of '+fc.order.length;}
+  document.getElementById('fc-q').textContent=q;
+  var setA=function(){document.getElementById('fc-a').textContent=a;};
+  if(wasFlipped&&!instant)setTimeout(setA,250);else setA();
+  document.getElementById('fc-count').textContent=cnt+' \u00B7 \u2713 '+fcLearned(fc.key)+'/'+d.c.length+' learned';
+  document.getElementById('fc-pbar').style.width=(100*fcLearned(fc.key)/d.c.length)+'%';
+  document.getElementById('fc-swap').classList.toggle('on',fc.swap);
+  document.getElementById('fc-only').classList.toggle('on',fc.only);
+  fcDecks();
+}
+function fcFlip(){if(!fc.key||!fc.order.length)return;document.getElementById('fc-card').classList.toggle('flipped');}
+function fcNext(){if(!fc.order.length)return;fc.i=(fc.i+1)%fc.order.length;fcRender();}
+function fcPrev(){if(!fc.order.length)return;fc.i=(fc.i-1+fc.order.length)%fc.order.length;fcRender();}
+function fcShuffle(){for(var i=fc.order.length-1;i>0;i--){var j=Math.floor(Math.random()*(i+1)),t=fc.order[i];fc.order[i]=fc.order[j];fc.order[j]=t;}fc.i=0;fcRender();}
+function fcSwap(){fc.swap=!fc.swap;fcRender();}
+function fcOnly(){fc.only=!fc.only;fc.i=0;fcBuild();fcRender();}
+function fcReset(){var p=fcProg();p[fc.key]={};fcSave();fcBuild();fc.i=0;fcRender();}
+function fcMark(v){
+  if(!fc.order.length)return;var p=fcProg(),idx=fc.order[fc.i];
+  if(!p[fc.key])p[fc.key]={};p[fc.key][idx]=v;fcSave();
+  if(fc.only&&v===1){fc.order.splice(fc.i,1);if(fc.i>=fc.order.length)fc.i=0;fcRender();}else fcNext();
+}
+document.addEventListener('keydown',function(e){
+  if(!document.getElementById('page-flash').classList.contains('active')||!fc.key)return;
+  var tg=(e.target&&e.target.tagName)||'';if(tg==='INPUT'||tg==='TEXTAREA')return;
+  if(e.key==='ArrowRight')fcNext();else if(e.key==='ArrowLeft')fcPrev();else if(e.key===' '||e.key==='Enter'){e.preventDefault();fcFlip();}
+});
+document.addEventListener('click',function(e){var t=e.target.closest?e.target.closest('[data-fc]'):null;if(t)showFlash(t.getAttribute('data-fc'));});
+
+/* ===== PRINT ===== */
+function fcPrint(keys){
+  var pa=document.getElementById('print-area');pa.innerHTML='';
+  var hd=document.createElement('div');hd.className='pr-head';hd.textContent="Alex's flashcards - cut along the dotted lines, fold each card in half and stick the two sides together.";pa.appendChild(hd);
+  for(var k=0;k<keys.length;k++){
+    var d=DECKS[keys[k]],t=document.createElement('div');t.className='pr-deck';t.textContent=d.t;pa.appendChild(t);
+    for(var i=0;i<d.c.length;i++){
+      var row=document.createElement('div');row.className='pr-card';
+      var a=document.createElement('div');a.className='pr-q';a.textContent=fc.swap?d.c[i][1]:d.c[i][0];
+      var b=document.createElement('div');b.className='pr-a';b.textContent=fc.swap?d.c[i][0]:d.c[i][1];
+      row.appendChild(a);row.appendChild(b);pa.appendChild(row);
+    }
+  }
+  window.print();
+}
+function fcPrintDeck(){if(fc.key)fcPrint([fc.key]);}
+function fcPrintSubject(){fcPrint(deckKeys(fc.subj));}
+
+/* ===== TIMER (uses the clock, so it stays accurate even if the phone pauses the page) ===== */
+var tTotal=1200,tLeft=1200,tEnd=0,tRun=false,tInt=null;
+function tFmt(s){var m=Math.floor(s/60),x=s%60;return(m<10?'0':'')+m+':'+(x<10?'0':'')+x;}
+function tSecs(){return tRun?Math.max(0,Math.ceil((tEnd-Date.now())/1000)):tLeft;}
+function tShow(){
+  var s=tSecs(),el=document.getElementById('t-disp'),bar=document.getElementById('t-bar'),msg=document.getElementById('t-msg'),mini=document.getElementById('t-mini'),f=tFmt(s);
+  el.textContent=f;mini.textContent=f;bar.style.width=(tTotal>0?100*s/tTotal:100)+'%';
+  var cls='t-display',m='';
+  if(s<=0){cls+=' done';m='Session complete! Great work - take a break.';}
+  else if(s<=60){cls+=' warn';m='Less than a minute to go!';}
+  else if(s<=300){cls+=' warn';m='Nearly there - keep going!';}
+  else if(tRun){m='Session in progress - stay focused!';}
+  el.className=cls;mini.style.color=(s<=0?'#7BCFA0':(s<=300?'#FF8C5A':'#69B3E7'));
+  if(m)msg.textContent=m;
+}
+function tBeep(){try{var c=new(window.AudioContext||window.webkitAudioContext)(),o=c.createOscillator(),g=c.createGain();o.connect(g);g.connect(c.destination);o.frequency.value=880;g.gain.setValueAtTime(0.3,c.currentTime);g.gain.exponentialRampToValueAtTime(0.001,c.currentTime+1.5);o.start(c.currentTime);o.stop(c.currentTime+1.5);}catch(e){}try{if(navigator.vibrate)navigator.vibrate([300,150,300]);}catch(e){}}
+function tTick(){
+  if(tRun&&tSecs()<=0){clearInterval(tInt);tRun=false;tLeft=0;var b=document.getElementById('t-go');b.textContent='\u25B6 Start';b.className='t-btn go';tBeep();}
+  tShow();
+}
+function tSet(m){tTotal=m*60;tLeft=m*60;document.getElementById('t-custom').value=m;var p=document.querySelectorAll('.t-preset');for(var i=0;i<p.length;i++)p[i].classList.toggle('sel',p[i].textContent===m+'m');document.getElementById('t-msg').textContent='Set to '+m+' minutes. Press Start!';tShow();}
+function tPreset(m){if(tRun)return;tSet(m);}
+function tCustom(v){if(tRun)return;var m=parseInt(v,10);if(isNaN(m)||m<1)m=1;if(m>120)m=120;tSet(m);}
+function tGo(){
+  var b=document.getElementById('t-go');
+  if(tRun){tLeft=tSecs();tRun=false;clearInterval(tInt);b.textContent='\u25B6 Resume';b.className='t-btn go';document.getElementById('t-msg').textContent='Paused - press Resume when ready.';tShow();return;}
+  if(tLeft<=0)tLeft=tTotal;
+  tEnd=Date.now()+tLeft*1000;tRun=true;b.textContent='\u23F8 Pause';b.className='t-btn pause';
+  document.getElementById('t-msg').textContent='Session in progress - stay focused!';
+  clearInterval(tInt);tInt=setInterval(tTick,500);tShow();
+}
+function tReset(){clearInterval(tInt);tRun=false;tLeft=tTotal;var b=document.getElementById('t-go');b.textContent='\u25B6 Start';b.className='t-btn go';document.getElementById('t-msg').textContent='Timer reset. Press Start when ready!';tShow();}
+function tToggle(){var f=document.getElementById('timer-float'),b=document.getElementById('t-toggle');if(f.classList.contains('minimised')){f.classList.remove('minimised');b.textContent='\u2013';}else{f.classList.add('minimised');b.textContent='+';}}
+document.addEventListener('visibilitychange',function(){if(!document.hidden)tTick();});
+
+/* ===== START ===== */
+renderCountdown();renderToday();renderTT();fcSubjects();fcDecks();tShow();
+
+</script>
+</body>
+</html>
